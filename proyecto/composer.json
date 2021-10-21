@@ -1,0 +1,39 @@
+{
+    "name": "2daw/g08",
+    "description": "Projecte web",
+    "type": "project",
+    "license": "copyleft",
+    "authors": [
+        {
+            "name": "Aaron Ventura",
+            "email": "aavefe@fp.insjoaquimmir.cat"
+        },{
+       		"name": "Xenia Pardo",
+       		"email": "xepaul@fp.insjoaquimmir.cat"
+   }],
+    "minimum-stability": "dev",
+    "require": {
+       "php": "^7.3",
+        "monolog/monolog": "2.x-dev",
+        "alrik11es/cowsayphp": "^1.2"
+   }, "autoload": {
+       "psr-4": {
+           "My\\": "library"
+       }
+   },  "scripts": {
+       "hello": [
+           "php ./scripts/hello.php"
+       ],
+       "deps": [
+           "ls ./library",
+           "ls ./vendor"
+       ],
+       "tests": [
+           "php ./vendor/bin/phpunit tests"
+       ]
+
+   },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+}
