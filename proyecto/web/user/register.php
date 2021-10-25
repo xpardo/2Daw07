@@ -2,6 +2,8 @@
 
 <!DOCTYPE html>
 <html lang="ca">
+<?= My\Helpers::render("/_commons/js.php") ?>
+<?= My\Helpers::render("/_commons/head.php") ?>
 <?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Sign up"]) ?>
 <body>
 <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Sign up"]) ?>
