@@ -5,21 +5,23 @@ use My\Helpers;
  
 final class HelpersTest extends TestCase
 {
-   public function testExpectedText(): void 
+  
+   /* public function testExpectedText(): void 
    {
        $txt = Helpers::sayHello("08");
        $this->assertEquals("Hello 08", $txt);
    }
-
+ */
     public function testhttp(): void 
     {
         $path="user/register.php";
-        $txt = Helpers::ssl($ssl);
-        $this->assertStringStartsWith("http" , $txt);
-        $this->assertStringEndsWith($path);
+        $txt = Helpers::url($path);
+        $this->assertStringStartsWith("http:" , $txt);
+        $this->assertStringEndsWith($path, $txt);
+        $txt2 = Helpers::url($path,true);
+        $this->assertStringStartsWith("https" , $txt2);
+        $this->assertStringEndsWith($path ,$txt2);
 
-        $this->assertStringStartsWith("https" , $txt);
-        $this->assertStringEndsWith($path);
 
     }
     

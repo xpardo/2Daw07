@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/../../vendor/autoload.php"; ?>
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -8,7 +9,7 @@
 </head>
 <body>
    <header>
-   <h1><a href="<?= $_SERVER["REQUEST_URI"] ?>">Projecte J-Suite</a></h1>
+   <h1><a href="<?= My\Helpers::url("/") ?>">Projecte J-Suite</a></h1>
    </header>
    <h2>Sign in</h2>
    <p>Welcome back!</p>
@@ -20,6 +21,7 @@
    </ul>
    <footer>
        <p>Curs 2021-22 de 2DAW</p>
+       <p>esto es un login</p>
    </footer>
 </body>
 </html>

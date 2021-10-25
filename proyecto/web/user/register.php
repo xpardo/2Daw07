@@ -1,3 +1,5 @@
+<?php require_once __DIR__ . "/../../vendor/autoload.php"; ?>
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -8,10 +10,10 @@
 </head>
 <body>
    <header>
-   <h1><a href="<?= $_SERVER["REQUEST_URI"] ?>">Projecte J-Suite</a></h1>
+   <h1><a href="<?= My\Helpers::url("/") ?>">Projecte J-Suite</a></h1>
    </header>
    <h2>Sig up</h2>
-   <p>MCreate an account.</p>
+   <p>Create an account.</p>
    <ul>
        <li>Operative system: <?= PHP_OS ?></li>
        <li>Web server: <?= $_SERVER['SERVER_SOFTWARE'] ?></li>
