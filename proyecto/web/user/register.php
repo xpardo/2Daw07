@@ -2,17 +2,10 @@
 
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Projecte J-Suite</title>
-</head>
+<?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Sign up"]) ?>
 <body>
-   <header>
-   <h1><a href="<?= My\Helpers::url("/") ?>">Projecte J-Suite</a></h1>
-   </header>
-   <h2>Sig up</h2>
+<?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Sign up"]) ?>
+   <h2>Sing up</h2>
    <p>Create an account.</p>
    <ul>
        <li>Operative system: <?= PHP_OS ?></li>
@@ -20,8 +13,6 @@
        <li>PHP version: <?= phpversion() ?></li>
        <li>IP address: <?= getHostByName(getHostName()) ?></li>
    </ul>
-   <footer>
-       <p>Curs 2021-22 de 2DAW</p>
-   </footer>
+   <?= My\Helpers::render("/_commons/footer.php") ?>
 </body>
 </html>
