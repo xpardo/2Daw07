@@ -3,12 +3,14 @@
 <!DOCTYPE html>
 <html lang="ca">
 <?= My\Helpers::render("/_commons/js.php") ?>
+<?= My\Helpers::render("/_commons/css.php") ?>
 <?= My\Helpers::render("/_commons/head.php") ?>
-<?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Sign up"]) ?>
 <body>
 <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Sign up"]) ?>
    <h2>Sing up</h2>
    <p>Create an account.</p>
+
+
    <ul>
        <li>Operative system: <?= PHP_OS ?></li>
        <li>Web server: <?= $_SERVER['SERVER_SOFTWARE'] ?></li>
