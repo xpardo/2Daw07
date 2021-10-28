@@ -26,5 +26,4 @@ vendor
 composer
 composer.phar
 composer.lock
-Database.php
-DatabaseTest.php.
+
