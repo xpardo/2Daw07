@@ -26,3 +26,7 @@ final class HelpersTest extends TestCase
     }
     
 }
+
+?>
+
+  <!--  htdocs -->
