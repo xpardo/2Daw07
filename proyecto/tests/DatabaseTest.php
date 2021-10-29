@@ -13,7 +13,9 @@ final class DatabaseTest extends TestCase
     public function testStatements(Database $db): void
     {
 
-        $sth = $dbh->prepare("SELECT email,role_id FROM users WHERE username = 'admin'");
+        $sth = $db->prepare("SELECT email,role_id FROM users WHERE username = 'admin'");
+        $cuenta_col = $sth->columnCount();
+        $this->assertEquals($cuenta_col,1);
     }
  }
 
