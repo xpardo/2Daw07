@@ -7,9 +7,13 @@
 <body>
    <header>
    <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Index"]) ?>
+   <?php My\Helpers::flash("Required name is empty"); ?>
+
    <h1><a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a></h1>
    <h1><a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a></h1>
    </header>
+
+
    <h2>Homepage</h2>
    <p>My first PHP web app works!</p>
    <ul>

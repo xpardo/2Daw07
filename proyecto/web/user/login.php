@@ -8,7 +8,7 @@
     <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Sign in"]) ?>
    <h2>Sign in</h2>
    <p>Welcome back!</p>
-  
+
    <ul>
        <li>Operative system: <?= PHP_OS ?></li>
        <li>Web server: <?= $_SERVER['SERVER_SOFTWARE'] ?></li>
