@@ -1,14 +1,16 @@
 <?php require_once __DIR__ . "/../vendor/autoload.php"; ?>
 <!DOCTYPE html>
 <html lang="ca">
+
 <?= My\Helpers::render("/_commons/js.php") ?>
 <?= My\Helpers::render("/_commons/head.php") ?>
 <?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Index"]) ?>
+
 <body>
    <header>
-   <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Index"]) ?>
-   <?php My\Helpers::flash("Required name is empty"); ?>
-
+    <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Index"]) ?>
+    <?= My\Helpers::flash("Required name is empty");?>
+   
    <h1><a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a></h1>
    <h1><a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a></h1>
    </header>

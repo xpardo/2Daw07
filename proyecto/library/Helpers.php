@@ -55,7 +55,7 @@ class Helpers {
            }
        }
    }
-
+   
    public static function flash(string $msg = "") : array
    {
        session_start();
@@ -70,8 +70,5 @@ class Helpers {
        }
        return $list;
    }
-
-
-
 
 }

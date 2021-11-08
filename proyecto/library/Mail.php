@@ -3,9 +3,7 @@
 namespace My;
 use \PHPMailer\PHPMailer\PHPMailer;
 use \PHPMailer\PHPMailer\Exception as PHPMailerException;
-require '../vendor/phpmailer/phpmailer/src/Exception.php';
-require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+use PHPMailer\PHPMailer\SMTP;
 
 $mail = new PHPMailer();
 $mail->IsSMTP();
@@ -28,33 +26,31 @@ class Mail {
 
     public function __construct(string $subject, string $body, bool $isHTML = false)
     {
-        $mail =include(__DIR__ . "/../config/database.php");
-        $this->_mailer = new PHPMailer();          
-
-        
+        $this->_mailer = new PHPMailer();  
+        $mail =include(__DIR__ . "/../config/mail.php");
+                
         // Setup SMTP server...
-        $this->SMTPDebug = $mail['debug'];                    
-        $this->isSMTP();                                            
-        $this->Host       = $mail['host'];              
+        $this->SMTPDebug = SMTP::DEBUG_SERVER;                                                              
+        $this->Host       = $mail['server'] ?? ['host'];              
         $this->SMTPAuth   = true;                                   
-        $this->Username   = $mail['username'];                     
-        $this->Password   = $mail['password'];                            
+        $this->Username   = $mail['server'] ?? ['username'];                     
+        $this->Password   = $mail['server'] ?? ['password'];                            
         $this->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           
-        $this->Port       = $mail['port'];
+        $this->Port       = $mail['server'] ?? ['port'];
 
         // Configure mail contact: from and reply...
-        $this->setFrom($mail['mail'],$mail['name']);
-        $this->addAddress($mail['mail'],$mail['name']);
+        $this->Mail =  $mail['from'] ?? ['mail'];
+        $this->Name = $mail['from'] ?? ['name'];
 
         // Set subject and body (HTML or not)...
-        $this->subject = $subject;
-        $this->body    = $body;
-        $this->isHTML();       
-
-                                       
+        $this->Subject = $subject;
+        $this->Body    = $body;
+                                        
     }
   
     public array $to;
+    public array $cc;
+    
     /**
      * Send mail to recipients
      *
@@ -63,13 +59,48 @@ class Mail {
      * @param array $bcc (optional)
      * @return bool
      */
-    public function send(array $to, array $cc = [], array $bcc = [])
+    public function send(array $to = [], array $cc = [], array $bcc = [])
     {
-        // Add recipients...
+
+
+        // Add recipients (to, cc, bcc)...
+        $this->to = ["2daw.equip08@fp.insjoaquimmir.cat"];
+        $this->cc = ["2daw.equip08@fp.insjoaquimmir.cat"];        
+       
+
+        foreach ($to as $rec) 
+        {
+             $to[] = $rec['to'];
+        }
+
+        foreach ($cc as $rec) 
+        {
+            $cc[] = $rec['cc'];
+        }
+
         // Send mail...
+
+
+        $this->Subject = 'prova';
+        $content = "<p>Aixo és una proba del grup 08</p>";
+
+        $this->MsgHTML($content); 
+        // if(!$this->Send()) 
+        // {
+        //     echo "S'ha produït un error en enviar el correu electrònic.";
+        //     var_dump($this);
+        // } else 
+        // {
+        //     echo "Correu electrònic enviat correctament";
+        // }
+      
+   
         // Clear recipients...
+
+        
     }
  }
  
 
  //2daw.equip08@fp.insjoaquimmiir.cat
+ //pep.jimenez@insjoaquimmir.cat

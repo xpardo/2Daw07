@@ -2,6 +2,8 @@
  
 use PHPUnit\Framework\TestCase;
 use My\Mail;
+;
+
  
 final class MailTest extends TestCase
 {
@@ -11,18 +13,16 @@ final class MailTest extends TestCase
        $this->assertIsObject($mail);
        return $mail;
    }
-
  
    /**
     * @depends testConstructor
     */
-    public function testSend(Mail $mail): void
-    {
-        $result = $mail->send(["2daw-08" => "2daw.equip08@fp.insjoaquimmiir.cat"]);
-        $this->assertTrue($result);
-    }
- }
- 
- //pep.jimenez@insjoaquimmir.cat
-
- //correu:  
+   public function testSend(Mail $mail): void
+   {
+       $result = $mail->send(
+              ["A" => "aavefe@fp.insjoaquimmir.cat"],     // TO
+              ["8" => "2daw.equip08@fp.insjoaquimmir.cat"]  // CC
+       );
+       $this->assertTrue($result);
+   }
+}

@@ -2,11 +2,15 @@
 
 <!DOCTYPE html>
 <html lang="ca">
+
 <?= My\Helpers::render("/_commons/js.php") ?>
 <?= My\Helpers::render("/_commons/css.php") ?>
 <?= My\Helpers::render("/_commons/head.php") ?>
+
 <body>
 <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Sign up"]) ?>
+
+
    <h2>Sing up</h2>
    <p>Create an account.</p>
 
