@@ -1,15 +1,25 @@
+<?php require_once __DIR__ . "/../vendor/autoload.php"; ?>
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Projecte J-Suite</title>
-</head>
+
+<?= My\Helpers::render("/_commons/js.php") ?>
+<?= My\Helpers::render("/_commons/head.php") ?>
+<?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Index"]) ?>
+<?php
+   My\Helpers::log()->info("Entro a la pàgina d'inici");
+   My\Helpers::log()->debug("Entro a una pàgina", ["page" => basename(__FILE__)]);
+?>
+
 <body>
    <header>
-       <h1><a href="<?php echo $_SERVER['PHP_SELF']; ?>">Projecte J-Suite</a></h1>
+    <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Index"]) ?>
+    <?= My\Helpers::flash("Required name is empty");?>
+   
+   <h1><a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a></h1>
+   <h1><a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a></h1>
    </header>
+
+
    <h2>Homepage</h2>
    <p>My first PHP web app works!</p>
    <ul>
@@ -18,8 +28,6 @@
        <li>PHP version: <?= phpversion() ?></li>
        <li>IP address: <?= getHostByName(getHostName()) ?></li>
    </ul>
-   <footer>
-       <p>Curs 2021-22 de 2DAW</p>
-   </footer>
+   <?= My\Helpers::render("/_commons/footer.php") ?>
 </body>
 </html>
