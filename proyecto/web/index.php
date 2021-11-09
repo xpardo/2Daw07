@@ -5,6 +5,10 @@
 <?= My\Helpers::render("/_commons/js.php") ?>
 <?= My\Helpers::render("/_commons/head.php") ?>
 <?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Index"]) ?>
+<?php
+   My\Helpers::log()->info("Entro a la pàgina d'inici");
+   My\Helpers::log()->debug("Entro a una pàgina", ["page" => basename(__FILE__)]);
+?>
 
 <body>
    <header>

@@ -2,14 +2,15 @@
  
 namespace My;
  
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
+ 
 class Helpers {
-   /**
-    * Says hello to user
-    *
-    * @return string
-    */
+  
 
    const MAX_FILE_SIZE = 2097152;
+   private static $_logger;
 
    public static function sayHello($username) {
        return "Hello {$username}";
@@ -70,5 +71,22 @@ class Helpers {
        }
        return $list;
    }
+
+   public static function log() : Logger
+   {
+       // Lazy loading pattern
+       if (is_null(self::$_logger)) {
+           // Create the logger
+           self::$_logger = new Logger("app");
+           // Now add some handlers
+           $path = __DIR__ . "/../logs/app.log";
+           self::$_logger->pushHandler(new StreamHandler($path, Logger::DEBUG));
+           self::$_logger->pushHandler(new FirePHPHandler());           
+       }
+       // Proxy pattern
+       return self::$_logger;
+   }
+
+
 
 }
