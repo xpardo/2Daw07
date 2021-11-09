@@ -16,7 +16,9 @@
        "php": "^7.3",
         "monolog/monolog": "2.x-dev",
         "alrik11es/cowsayphp": "^1.2",
-        "phpmailer/phpmailer": "dev-master"
+        "phpmailer/phpmailer": "dev-master",
+        "rakit/validation": "dev-master",
+        "twig/twig": "3.x-dev"
    }, "autoload": {
        "psr-4": {
            "My\\": "library"
