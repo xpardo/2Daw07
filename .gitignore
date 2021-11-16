@@ -30,3 +30,4 @@ config/database.php
 config/mail.php
 Database.php
 DatabaseTest.php
+uploads
