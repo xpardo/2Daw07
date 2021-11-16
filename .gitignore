@@ -31,3 +31,4 @@ config/mail.php
 Database.php
 DatabaseTest.php
 uploads
+logs
