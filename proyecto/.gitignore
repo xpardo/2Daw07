@@ -1,0 +1,11 @@
+composer
+composer.phar
+vendor
+composer.lock
+config/database.php
+config/mail.php
+logs/*
+uploads/*
+Database.php
+DatabaseTest.php
+

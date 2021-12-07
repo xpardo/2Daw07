@@ -1,4 +1,4 @@
-<h1><a href="<?= My\Helpers::url("/web") ?>">Projecte J-Suite</a></h1>
+<h1><a href="<?= My\Helpers::url("/web") ?>">Projecte G08</a></h1>
 
 <?php $flash = My\Helpers::flash(); ?>
 <?php if (!empty($flash)): ?>

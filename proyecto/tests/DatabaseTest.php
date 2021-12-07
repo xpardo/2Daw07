@@ -12,12 +12,23 @@ final class DatabaseTest extends TestCase
     */
     public function testStatements(Database $db): void
     {
+        // Check 1
+        $stmt = $db->prepare("SELECT email,role_id FROM users WHERE username = ?");
+        $stmt->execute(['admin']);
+        $count = 0;
+        foreach ($stmt as $row) {
+            $count++;
+        }
+        $this->assertEquals($count, 1);
 
-        $sth = $db->prepare('SELECT email,role_id FROM users WHERE username = "admin"');
-        $cuenta_col = $sth->columnCount();
-        $this->assertEquals($cuenta_col, 1);
+        // Check 2
+        $this->expectException(Exception::class);
+        $db->close();
+        $stmt = $db->prepare("SELECT email,role_id FROM users WHERE username = ?");
+        $stmt->execute(['admin']);
+        }
     }
- }
+ 
  
 ?>
 
