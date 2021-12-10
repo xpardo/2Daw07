@@ -76,7 +76,7 @@ if (!empty($_POST)) {
     }else if(!preg_match('/^[\d]+1$/',$_POST["password1"])){
         $error.="password no te format <br>";
     }
-    
+
  }
 
 //upload

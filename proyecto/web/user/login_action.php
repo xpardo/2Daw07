@@ -61,6 +61,17 @@ if ($validation->fails()) {
             // Create user session token
             // ...
 
+            $token = Token::generate();
+            $type = Token::SESSION;
+            $sql = "INSERT INTO user_tokens 
+                    VALUES ($uid, '$token', '$type', '$datetime')";
+            Helpers::log()->debug("SQL: {$sql}");
+            $stmt = $db->prepare($sql);            
+            $stmt->execute();
+            Helpers::log()->debug("user token {$token}");
+
+
+
             $db->close();
 
             // Create user session cookie
