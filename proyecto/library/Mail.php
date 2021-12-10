@@ -1,106 +1,81 @@
 <?php
- 
+
 namespace My;
+
 use \PHPMailer\PHPMailer\PHPMailer;
 use \PHPMailer\PHPMailer\Exception as PHPMailerException;
-use PHPMailer\PHPMailer\SMTP;
-
-$mail = new PHPMailer();
-$mail->IsSMTP();
-$mail->Mailer = "smtp";
 
 class Mail {
     // PHPMailer
     private $_mailer;
-    public string $subject;
-    public string $body;
-    public bool $isHTML;
 
     /**
      * Constructs mail
-     *
      * @param string $subject
      * @param string $body
      * @param bool $isHTML (optional)
      */
-
     public function __construct(string $subject, string $body, bool $isHTML = false)
     {
-        $this->_mailer = new PHPMailer();  
-        $mail =include(__DIR__ . "/../config/mail.php");
-                
         // Setup SMTP server...
-        $this->SMTPDebug = SMTP::DEBUG_SERVER;                                                              
-        $this->Host       = $mail['server'] ?? ['host'];              
-        $this->SMTPAuth   = true;                                   
-        $this->Username   = $mail['server'] ?? ['username'];                     
-        $this->Password   = $mail['server'] ?? ['password'];                            
-        $this->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           
-        $this->Port       = $mail['server'] ?? ['port'];
-
+        $cnf = include(__DIR__ . "/../config/mail.php");
+        $this->_mailer = new PHPMailer();
+        $this->_mailer->IsSMTP();
+        $this->_mailer->Mailer     = $cnf["server"]["protocol"];
+        $this->_mailer->SMTPDebug  = $cnf["server"][0];
+        $this->_mailer->SMTPAuth   = TRUE;
+        $this->_mailer->SMTPSecure = $cnf["server"]["security"];
+        $this->_mailer->Port       = $cnf["server"]["port"];
+        $this->_mailer->Host       = $cnf["server"]["host"];
+        $this->_mailer->Username   = $cnf["server"]["username"];
+        $this->_mailer->Password   = $cnf["server"]["password"];
         // Configure mail contact: from and reply...
-        $this->Mail =  $mail['from'] ?? ['mail'];
-        $this->Name = $mail['from'] ?? ['name'];
-
+        if (isset($cnf["from"])) {
+            $this->_mailer->SetFrom($cnf["from"]["mail"], $cnf["from"]["name"]);
+        }
+        if (isset($cnf["reply"])) {
+            $this->_mailer->AddReplyTo($cnf["reply"]["mail"], $cnf["reply"]["name"]);
+        }
         // Set subject and body (HTML or not)...
-        $this->Subject = $subject;
-        $this->Body    = $body;
-                                        
+        $this->_mailer->Subject = $subject;
+        if ($isHTML) {
+            $this->_mailer->IsHTML(true);
+            $this->_mailer->MsgHTML($body);    
+        } else {
+            $this->_mailer->IsHTML(false);
+            $this->_mailer->Body = $body;         
+        }
     }
-  
-    public array $to;
-    public array $cc;
-    
+
     /**
      * Send mail to recipients
-     *
+     * 
      * @param array $to
      * @param array $cc (optional)
      * @param array $bcc (optional)
+     * 
      * @return bool
      */
-    public function send(array $to = [], array $cc = [], array $bcc = [])
+    public function send(array $to, array $cc = [], array $bcc = []) 
     {
-
-
-        // Add recipients (to, cc, bcc)...
-        $this->to = ["2daw.equip08@fp.insjoaquimmir.cat"];
-        $this->cc = ["2daw.equip08@fp.insjoaquimmir.cat"];        
-       
-
-        foreach ($to as $rec) 
-        {
-             $to[] = $rec['to'];
+        // Add recipients...
+        foreach ($to as $name => $mail) {
+            $this->_mailer->AddAddress($mail, $name);
         }
-
-        foreach ($cc as $rec) 
-        {
-            $cc[] = $rec['cc'];
+        foreach ($cc as $name => $mail) {
+            $this->_mailer->AddCC($mail, $name);
         }
-
+        foreach ($bcc as $name => $mail) {
+            $this->_mailer->AddBCC($mail, $name);
+        }
         // Send mail...
-
-
-        $this->Subject = 'prova';
-        $content = "<p>Aixo és una proba del grup 08</p>";
-
-        $this->MsgHTML($content); 
-        // if(!$this->Send()) 
-        // {
-        //     echo "S'ha produït un error en enviar el correu electrònic.";
-        //     var_dump($this);
-        // } else 
-        // {
-        //     echo "Correu electrònic enviat correctament";
-        // }
-      
-   
         // Clear recipients...
-
-        
+        try {
+            $result = $this->_mailer->Send();
+            $this->_mailer->clearAllRecipients();
+            return $result;
+        } catch (PHPMailerException $e) {
+            return false;
+        }
     }
- }
- 
-
- //2daw.equip08@fp.insjoaquimmiir.cat
- //pep.jimenez@insjoaquimmir.cat
+}

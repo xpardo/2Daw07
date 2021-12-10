@@ -15,6 +15,6 @@ final class VendorFarmTest extends TestCase
        $obj = Farm::create(Farm\Tux::class);
        $msg = "I'm Tux!";
        $txt = $obj->say($msg);
-       $this->assertStringContainsString($msg, "I'm Tux!");
+       $this->assertStringContainsString($msg, $txt);
    }
 }

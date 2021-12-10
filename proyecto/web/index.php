@@ -5,20 +5,21 @@
 <?= My\Helpers::render("/_commons/js.php") ?>
 <?= My\Helpers::render("/_commons/head.php") ?>
 <?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Index"]) ?>
-<?php
-   My\Helpers::log()->info("Entro a la pàgina d'inici");
-   My\Helpers::log()->debug("Entro a una pàgina", ["page" => basename(__FILE__)]);
-?>
 
 <body>
    <header>
     <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Index"]) ?>
     <?= My\Helpers::flash("Required name is empty");?>
    
-   <h1><a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a></h1>
-   <h1><a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a></h1>
+  
+
+  
    </header>
 
+   <p>
+    <a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a> ||
+    <a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a>
+  </p>
 
    <h2>Homepage</h2>
    <p>My first PHP web app works!</p>
@@ -28,6 +29,7 @@
        <li>PHP version: <?= phpversion() ?></li>
        <li>IP address: <?= getHostByName(getHostName()) ?></li>
    </ul>
+
    <?= My\Helpers::render("/_commons/footer.php") ?>
 </body>
 </html>
