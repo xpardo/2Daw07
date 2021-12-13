@@ -1,247 +1,127 @@
- <?php
-
- require('vendor/autoload.php');
-
-session_start();
+<?php
+//profe
+require_once __DIR__ . "/../../vendor/autoload.php";
 
 use Rakit\Validation\Validator;
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+use PHPMailer\PHPMailer\Exception as PHPMailerException;
+use My\Helpers;
+use My\Database;
+use My\Mail;
+use My\Token;
 
 $url = Helpers::url("/user/register.php");
 
-//validador
- 
-$validator = new Validator;
+$validator = new Validator();
 
-$validator = $validator ->make($_POST + $_FILES,[
-    'username' => 'required|min:6 character',
-    'email' => 'required|email',
-    'password1' => 'required|min 8|regex: /^[\d]+1$/',
-    'password2' => 'required|same:password1',
-    'avatar' => [
-            'required|between:1MB',
-                $validator ('uploaded_file')->fileTypes('png|jpg|gif')->message('la imatge a de ser /png/jpg/gif image')
-    ],
-    'terms' => 'rquired' 
+$validation = $validator->make($_POST + $_FILES, [
+    'username'              => 'required',
+    'email'                 => 'required|email',
+    'password'              => 'required|min:6|regex:/\d/',
+    'confirm_password'      => 'required|same:password',
+    'avatar'                => 'uploaded_file|max:2M|mimes:jpeg,png',
+    'terms'                 => 'required'
 ]);
-    
+
 $validation->validate();
 
 if ($validation->fails()) {
-    // handling errors
+    // See https://github.com/rakit/validation#working-with-error-message
     $errors = $validation->errors();
-    echo "<pre>";
-    print_r($errors->firstOfAll());
-    echo "Alguna cosa a surtit malament</pre>";
-    exit;
+    $messages = $errors->all();
+    foreach ($messages as $message) {
+        Helpers::flash($message);
+    }
+
 } else {
-    // validation passes
-    $username=$_POST["username"];
-    $password=hash("sha256",$_POST["password1"]);
-    $email=$_POST["email"];
-    echo "Success!";
-}
 
+    $username = $_POST["username"];
+    $password = hash("sha256", $_POST["password"]);
+    $email    = $_POST["email"];
 
-$errors="";
-
-if(empty($_POST["username"] )){
-    $error.="el username es obligatori <br>";
-}
-
-
-// Data received?
-if (!empty($_POST)) {
-    // Valid data?
-    if (!empty($_POST["username"])) {
-        $token = bin2hex(random_bytes(20));
-        My\Helpers::redirect($url);
-    } else {
-        $error.="el username es obligatori <br>";
-    }
-
-    if (!empty($_POST["email"])){
-        My\Helpers::redirect($url);
-    }else{
-        $error.="el email es obligatori <br>";
-    }
-    if (!empty($_POST["password1"]!=$_POST["password2"])){
-        $error.="els passwors no  coincideixen<br>";
-    }else if(!preg_match('/^[\d]+1$/',$_POST["password1"])){
-        $error.="password no te format <br>";
-    }
-
- }
-
-//upload
-if (!empty($_POST)) {
-    // Valid data?
-    if (!empty($_POST["username"])) {
-       $data = [
-            "username"  => $_POST["username"],
-            "avatar" => null
-        ];
-        $token = bin2hex(random_bytes(20));
-      
-
-        // Step 1. Upload file (optional)
-        if (isset($_FILES["avatar"])) {
-            try {
-                // Upload file
-                $data["avatar"] = My\Helpers::upload($_FILES["avatar"]);
-            } catch (Exception $e) {
-                // Uploads dir error...
-                $data["avatar"] = My\Helpers::upload($_FILES["avatar"]);
-            }
-        }
-    }
-}
- 
-
-$url = My\Helpers::url("/web/user/register_action2.php?t=$token&user=$user_id");
-My\Helpers::redirect($url);
-
-    
-
-    //funcio busca si exiteix el usuari i email
-    function checkIfUsernameExists($username){
-        $cnf = include(__DIR__ . "/../config/database.php");
-     
-        $res=false;
-    
-        $sql="select count(*) as count from users where username='$username' or email='$email'" ;  
-        $res = mysqli_query($cnf,$sql) or die('Consulta fallida: ' . mysqli_error($cnf));
+    try {
+        
+        $db = new Database();
+        $sql = "SELECT COUNT(*) as count FROM users 
+                WHERE username='$username' OR email='$email'";
         Helpers::log()->debug("SQL: {$sql}");
-        $registre = mysqli_fetch_array($res, MYSQLI_ASSOC);
-    
-        return $registre;
-    
-    }
-
-
-
-
-    //funcio que Insireix el usuari a la base de dades
-
-    function addUser($id,$username,$email,$password){
-
-        $cnf = include(__DIR__ . "/../config/database.php");
-        $res=TRUE;
-        try {
-            $sql="insert into users (id,username,email,password,avatar_id) value(0,'$username','$email','sha256 ($password)',0)" ;  
-            $res = mysqli_query($cnf,$sql) or $res=FALSE;
-
-            $cnf->exec($sql);
-            $id = $cnf->lastInsertId();
-         
-
-        } catch(PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetch();        
+        $count = $row["count"]; // $row[0];
+        Helpers::log()->debug("Existing users = $count");
         
-        } 
+        if ($count == 0) {
 
-        return $res;
+            $datetime = date('Y-m-d H:i:s');
 
-        $cnf=null;        
-    }
-
-    function addAvatar($id,$avatar){
-        $cnf = include(__DIR__ . "/../config/database.php");
-        $res=TRUE;
-        try {
-            $sql="insert into files (id,filepath) value('0','$avatar')";
-            $res = mysqli_query($cnf,$sql) or $res=FALSE;
-
-            $cnf->exec($sql);
-            $id = $cnf->lastInsertId();
-        } catch(PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
-        
-        } 
-
-        return $res;
-
-        $cnf=null;
-    }
-    
-    //insertat tocken
-    function Token($user_id,$token){
-        $cnf = include(__DIR__ . "/../config/database.php");
-        try {
-            $sql="insert into user_token (user_id,tocken,type) value(0,'$token','A')" ; 
-            $cnf->exec($sql);
-            $user_id = $cnf->lastInsertId(); 
-        }catch(PDOException $e){
-            echo $sql . "<br>" . $e->getMessage();
-        }
-    }
-
-if($_POST["password1"]!=$_POST["password2"]){
-    if (checkIfUsernameExists($_POST["username"])){
-    
-
-            if(addUser($_POST["username"],$_POST["email"],$_POST["password"]) and addAvatar($_POST["avatar"])){
-                if(Token($_GET['token'])){
-                    
-
-                    $mail = new PHPMailer(true);
-        
-                    try {
-                        //Server settings
-                        $mail->isSMTP(); 
-                        $mail->SMTPDebug = 0;                                                              
-                        $mail->SMTPAuth   = true;     
-                        $mail->SMTPSecure = 'tls';         
-                        $mail->Port       = 587;   
-                        $mail->Host       = 'smpt.gmail.com';                                  
-                        $mail->Username   = '2daw.equip08@fp.insjoaquimmir.cat';                    
-                        $mail->Password   = '9LeQr>7j';                              
-                                                          
-
-                        //Recipients
-                        $mail->setFrom('2daw.equip08@fp.insjoaquimmir.cat', 'Mailer');
-                        $mail->addAddress("email:".$_POST['email'].$_POST['username']."\n");    
-                        
-                        // Content
-                        $mail->isHTML(true);                           
-                        $mail->Subject = 'confirm';
-                        $mail->Body    = 
-                       
-                        '<form action="' . $url . '">' . $url . '" method="GET"> 
-                            <p>Venvinguts a la nosta app</p>
-                            <a href="' . $url . '">' . $url . '</a>
-                        </form>';
-
-                        $mail->send();
-                        log("S'ha enviat el missatge") ;
-                    } catch (Exception $e) {
-                        log("No s'ha pogut enviar el missatge. Error de correu: {$mail->ErrorInfo}");
-                    }
-                
+            // Upload avatar and create file (optional)
+            $fid = "NULL";
+            if (!empty($_FILES["avatar"]["name"])) {
+                Helpers::log()->debug("Uploading file", $_FILES["avatar"]);
+                $filepath = $_FILES["avatar"]["tmp_name"];
+                $filepath = Helpers::upload($_FILES["avatar"], $username);
+                $filesize = $_FILES["avatar"]["size"];
+                $sql = "INSERT INTO files(filepath,filesize,uploaded) 
+                        VALUES ('$filepath',$filesize,'$datetime')";
+                Helpers::log()->debug("SQL: {$sql}");
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+                $fid = $db->lastInsertId();
+                Helpers::log()->debug("New file with id {$fid}");
             }
-        }else{
-            echo ("el email ja existeix <br>");  
-        }
-    }else{
-        echo ("el username ja existeix <br>");
-    }
 
-}else{
-    echo ("Els passwords no coincideixen <br>");
+            // Create user
+            Helpers::log()->debug("Creating user");
+            $sql = "INSERT INTO users(username,password,email,status,role_id,avatar_id,created,last_access)
+                    VALUES ('$username','$password','$email',0,2,$fid,'$datetime','$datetime')";
+            Helpers::log()->debug("SQL: {$sql}");
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $uid = $db->lastInsertId();
+            Helpers::log()->debug("New user with id {$uid}");
+            
+            // Create user activation token
+            Helpers::log()->debug("Creating user activation token");
+            $token = Token::generate();
+            $type = Token::ACTIVATION;
+            $sql = "INSERT INTO user_tokens 
+                    VALUES ($uid, '$token', '$type', '$datetime')";
+            Helpers::log()->debug("SQL: {$sql}");
+            $stmt = $db->prepare($sql);            
+            $stmt->execute();
+            Helpers::log()->debug("New user activation token {$token}");
+
+            $db->close();
+            
+            // Send activation mail
+            Helpers::log()->debug("Sending user activation mail");
+            $tokenUrl = Helpers::url("/user/register_action2.php") . "?token={$token}";
+            Helpers::log()->debug("Token URL: {$tokenUrl}");
+            $link = "<a href='{$tokenUrl}'>aquí</a>";
+            $mail = new Mail("Activar compte J-Suite",  "Fes click {$link} per activar el compte.");            
+            $send = $mail->send([$email]);
+            if ($send) {
+                Helpers::log()->debug("Send mail OK");
+                $url = Helpers::url("/"); // Go to home
+                Helpers::flash("Procés de registre completat correctament.");
+            } else {
+                Helpers::log()->debug("Send mail ERR");
+                throw new PHPMailerException("Send method returns false.");
+            }
+        } else {
+            Helpers::log()->debug("Username or mail already exists");
+            Helpers::flash("El nom d'usuari o el correu ja existeixen");
+        }
+    } catch (PDOException $e) {
+        Helpers::log()->debug($e->getMessage());
+        Helpers::flash("No s'han pogut desar les dades. Prova-ho més tard.");
+    } catch (PHPMailerException $e) {
+        Helpers::log()->debug($e->getMessage());
+        Helpers::flash("No s'han pogut enviar el correu d'activació. Contacta amb l'administrador/a.");
+    } catch (Exception $e) {
+        Helpers::log()->debug($e->getMessage());
+        Helpers::flash("Hi hagut un error inesperat. Prova-ho més tard.");
+    }
 }
 
 Helpers::redirect($url);
-
-
- 
-
-
-?> 
-
-

@@ -59,22 +59,29 @@ if ($validation->fails()) {
             Helpers::log()->debug("User updated");
 
             // Create user session token
-            // ...
+          
 
             $token = Token::generate();
             $type = Token::SESSION;
-            $sql = "INSERT INTO user_tokens 
-                    VALUES ($uid, '$token', '$type', '$datetime')";
+            $sql = "INSERT INTO user_tokens VALUES ($uid, '$token', '$type', '$datetime')";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);            
             $stmt->execute();
             Helpers::log()->debug("user token {$token}");
 
-
-
             $db->close();
 
+            // ...
             // Create user session cookie
+
+
+            session_start();
+         
+            setcookie("session_token",($_COOKIE["Token"]));
+            $_SESSION[$uid]=$_COOKIE["username"] ;
+            Helpers::log()->debug($e->getMessage());
+            Helpers::flash("S'han creat les cookies.");
+
             // ...
             
         } else {
