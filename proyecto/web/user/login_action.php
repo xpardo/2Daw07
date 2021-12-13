@@ -35,8 +35,7 @@ if ($validation->fails()) {
 
         Helpers::log()->debug("Check username and password");
         $db = new Database();
-        $sql = "SELECT * FROM users u 
-                WHERE u.username='$username' AND password='$password'";
+        $sql = "SELECT * FROM users u  WHERE u.username='$username' AND password='$password'";
         Helpers::log()->debug("SQL: {$sql}");
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -50,38 +49,39 @@ if ($validation->fails()) {
             
             // Update user
             Helpers::log()->debug("Update user last access");
-            $sql = "UPDATE users 
-                    SET last_access='$datetime' 
-                    WHERE id=$uid";
+            $sql = "UPDATE users SET last_access='$datetime' WHERE id=$uid";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);
             $stmt->execute();
             Helpers::log()->debug("User updated");
 
-            // Create user session token
-          
 
+            // Create user session token
             $token = Token::generate();
             $type = Token::SESSION;
             $sql = "INSERT INTO user_tokens VALUES ($uid, '$token', '$type', '$datetime')";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);            
             $stmt->execute();
-            Helpers::log()->debug("user token {$token}");
+            Helpers::log()->debug("user session token {$token}");
 
             $db->close();
 
             // ...
+
             // Create user session cookie
-
-
             session_start();
-         
-            setcookie("session_token",($_COOKIE["Token"]));
-            $_SESSION[$uid]=$_COOKIE["username"] ;
-            Helpers::log()->debug($e->getMessage());
-            Helpers::flash("S'han creat les cookies.");
+            $token = "session_token";
+            $remember = "remember";
+            setcookie($token,$remember);
+            $_SESSION[$uid]="uid";
 
+            if(!isset($_COOKIE[$token])) {
+                Helpers::flash("S'anomena galeta '" . $token . "' no està establert!") ;
+            } else {
+                Helpers::flash("Cookie '" . $token . "'està establert!<br>");
+                Helpers::flash ("El valor és: " . $_COOKIE[$token]);
+            }
             // ...
             
         } else {
