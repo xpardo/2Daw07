@@ -73,15 +73,16 @@ if ($validation->fails()) {
             session_start();
             $token = "session_token";
             $remember = "remember";
-            setcookie($token,$remember);
+            setcookie($token,$remember,time() + 365*24*60*60,'/');
             $_SESSION[$uid]="uid";
-
-            if(!isset($_COOKIE[$token])) {
+            if(isset($_COOKIE[$token])) {
                 Helpers::flash("S'anomena galeta '" . $token . "' no està establert!") ;
             } else {
                 Helpers::flash("Cookie '" . $token . "'està establert!<br>");
                 Helpers::flash ("El valor és: " . $_COOKIE[$token]);
             }
+
+            
             // ...
             
         } else {

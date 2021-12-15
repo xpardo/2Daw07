@@ -64,8 +64,7 @@ if ($validation->fails()) {
         if ($emailChanged) {
             $email = $_POST["email"];
             Helpers::log()->debug("Check other users with email '{$email}'");
-            $sql = "SELECT COUNT(*) as count FROM users 
-                    WHERE id!=$uid AND email='$email'";
+            $sql = "SELECT COUNT(*) as count FROM users  WHERE id!=$uid AND email='$email'";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);
             $stmt->execute();
@@ -92,8 +91,7 @@ if ($validation->fails()) {
             $filepath = $_FILES["avatar"]["tmp_name"];
             $filepath = Helpers::upload($_FILES["avatar"], $username);
             $filesize = $_FILES["avatar"]["size"];
-            $sql = "INSERT INTO files(filepath,filesize,uploaded) 
-                    VALUES ('$filepath',$filesize,'$datetime')";
+            $sql = "INSERT INTO files(filepath,filesize,uploaded)  VALUES ('$filepath',$filesize,'$datetime')";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);
             $stmt->execute();

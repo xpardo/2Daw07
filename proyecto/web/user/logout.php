@@ -33,7 +33,7 @@
 
                     <form name="logout" action="<?= My\Helpers::url("/user/logout_action.php") ?>" method="post">
                         <p>
-                            <input type="submit" value="Logout">
+                            <a href="'.$_SERVER['PHP_SELF'].'?borrarcookie=1">logout</a>;
                         </p>
                        
                     </form>

@@ -41,8 +41,7 @@ if ($validation->fails()) {
     try {
         
         $db = new Database();
-        $sql = "SELECT COUNT(*) as count FROM users 
-                WHERE username='$username' OR email='$email'";
+        $sql = "SELECT COUNT(*) as count FROM users  WHERE username='$username' OR email='$email'";
         Helpers::log()->debug("SQL: {$sql}");
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -61,8 +60,7 @@ if ($validation->fails()) {
                 $filepath = $_FILES["avatar"]["tmp_name"];
                 $filepath = Helpers::upload($_FILES["avatar"], $username);
                 $filesize = $_FILES["avatar"]["size"];
-                $sql = "INSERT INTO files(filepath,filesize,uploaded) 
-                        VALUES ('$filepath',$filesize,'$datetime')";
+                $sql = "INSERT INTO files(filepath,filesize,uploaded)  VALUES ('$filepath',$filesize,'$datetime')";
                 Helpers::log()->debug("SQL: {$sql}");
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
@@ -72,8 +70,7 @@ if ($validation->fails()) {
 
             // Create user
             Helpers::log()->debug("Creating user");
-            $sql = "INSERT INTO users(username,password,email,status,role_id,avatar_id,created,last_access)
-                    VALUES ('$username','$password','$email',0,2,$fid,'$datetime','$datetime')";
+            $sql = "INSERT INTO users(username,password,email,status,role_id,avatar_id,created,last_access) VALUES ('$username','$password','$email',0,2,$fid,'$datetime','$datetime')";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);
             $stmt->execute();
@@ -84,8 +81,7 @@ if ($validation->fails()) {
             Helpers::log()->debug("Creating user activation token");
             $token = Token::generate();
             $type = Token::ACTIVATION;
-            $sql = "INSERT INTO user_tokens 
-                    VALUES ($uid, '$token', '$type', '$datetime')";
+            $sql = "INSERT INTO user_tokens  VALUES ($uid, '$token', '$type', '$datetime')";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);            
             $stmt->execute();
@@ -125,3 +121,9 @@ if ($validation->fails()) {
 }
 
 Helpers::redirect($url);
+
+
+/*
+    setcookie($token,'',time()-3600,'/');
+
+ */

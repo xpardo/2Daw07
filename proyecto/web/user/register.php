@@ -26,9 +26,7 @@
    <p>Create an account.</p>
 
 
-
-   <div class="container-fluid">
-        <div class="row">
+>
             <div class="container">
             
                 <div class="row">
@@ -71,8 +69,7 @@
                     </form>
         
                 </div>
-            </div>
-        </div>
+           
         <br>
         <p>Anar al <a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a></p>
     </div> 
