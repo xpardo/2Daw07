@@ -22,27 +22,39 @@ function comprobarCookies()
 }
 
 if(comprobarCookies() == true ){
-    Helpers::flash("la cooki esta activa");
+    Helpers::flash("la cooki existeix");
     
     
 }else{
-    Helpers::flash("la cookie esta desactivada");
+    Helpers::flash("la cookie no existeix");
 }
+
 
 /**
  * Borrar token de sessió
+*/
+$type = Token::SESSION;
+$sql = "DELETE from user_tokens where id='$uid', token='$token', type='$type', created='$datetime' ";
+Helpers::log()->debug("SQL: {$sql}");
+$stmt = $db->prepare($sql);            
+$stmt->execute();
+Helpers::log()->debug("user session eliminated  token {$token}");
+
+$db->close();
+
+
+/**
+ * Consultarem si existeix el token de sessió (“S”) a la taula user_tokens de la BD.
  */
-
-
-
- $type = Token::SESSION;
- $sql = "DELETE from user_tokens where id='$uid', token='$token', type='$type', created='$datetime' ";
- Helpers::log()->debug("SQL: {$sql}");
- $stmt = $db->prepare($sql);            
- $stmt->execute();
- Helpers::log()->debug("user session eliminated  token {$token}");
-
- $db->close();
+Helpers::log()->debug("Consultar token");
+$type = Token::ACTIVATION;
+$sql = "SELECT *  FROM user_tokens where $type";
+Helpers::log()->debug("SQL: {$sql}");
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$row = $stmt->fetch();
+Helpers::log()->debug("Existing Token = $type");   
+ 
 
  
 
@@ -56,19 +68,6 @@ if(!empty($_GET['borrarcookie'])) {
     Helpers::flash("S'ha borrat la cookie");
 }
 
-
-/**
- * comprovar si estan habilitades
-*/
-
-
-if(count($_COOKIE) > 0) {
-    Helpers::flash("les cookies estan habilitades") ;
-
-  } else {
-    Helpers::flash("Les cookies estan desactivades") ;
-
-  }
 
 
 Helpers::redirect($url);

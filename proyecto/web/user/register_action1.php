@@ -122,8 +122,3 @@ if ($validation->fails()) {
 
 Helpers::redirect($url);
 
-
-/*
-    setcookie($token,'',time()-3600,'/');
-
- */
