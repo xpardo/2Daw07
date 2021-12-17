@@ -1,15 +1,15 @@
 <?php
+
 session_start();
 $url = Helpers::url("/"); 
  
-
 
 $_SESSION = $uid;
 
 
 /**
  * comprobar si existeix cookie
- */
+*/
 
 function comprobarCookies()
 {
@@ -32,27 +32,24 @@ if(comprobarCookies() == true ){
 
 /**
  * Consultarem si existeix el token de sessió (“S”) a la taula user_tokens de la BD.
- */
-    Helpers::log()->debug("Consultar token");
-    $type = Token::ACTIVATION;
-    $sql = "SELECT *  FROM user_tokens where $type";
-    Helpers::log()->debug("SQL: {$sql}");
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    if($row){
-        Helpers::log()->debug("Existing Token = $type");   
-    }else{
-        Helpers::log()->debug("No Existing Token = $type");   
+*/
 
-        session_unset($_SESSION['$uid']);
-        session_destroy();
-        setcookie($token,'',time()-3600,'/');
-        Helpers::flash("S'ha borrat la cookie");
-    }
-    
-    
-
+Helpers::log()->debug("Consultar token");
+$type = Token::ACTIVATION;
+$sql = "SELECT *  FROM user_tokens where $type";
+Helpers::log()->debug("SQL: {$sql}");
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$row = $stmt->fetch();
+if($row){
+    Helpers::log()->debug("Existing Token = $type");   
+}else{
+    Helpers::log()->debug("No Existing Token = $type");
+    session_unset($_SESSION['$uid']);
+    session_destroy();
+    setcookie($token,'',time()-3600,'/');
+    Helpers::log()->debug("s'ha elminat la cookie");
+}
 
 Helpers::redirect($url);
 

@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-$url = Helpers::url("/"); 
+$url = Helpers::url("/user/login.php"); 
  
 
 $_SESSION = $uid;
@@ -9,7 +9,7 @@ $_SESSION = $uid;
 
 /**
  * comprobar si existeix cookie
- */
+*/
 
 function comprobarCookies()
 {
@@ -22,13 +22,10 @@ function comprobarCookies()
 }
 
 if(comprobarCookies() == true ){
-    Helpers::flash("la cooki existeix");
-    
-    
+    Helpers::flash("la cooki existeix");  
 }else{
     Helpers::flash("la cookie no existeix");
 }
-
 
 /**
  * Borrar token de sessió
@@ -39,13 +36,12 @@ Helpers::log()->debug("SQL: {$sql}");
 $stmt = $db->prepare($sql);            
 $stmt->execute();
 Helpers::log()->debug("user session eliminated  token {$token}");
-
 $db->close();
 
 
 /**
  * Consultarem si existeix el token de sessió (“S”) a la taula user_tokens de la BD.
- */
+*/
 Helpers::log()->debug("Consultar token");
 $type = Token::ACTIVATION;
 $sql = "SELECT *  FROM user_tokens where $type";
@@ -57,7 +53,6 @@ Helpers::log()->debug("Existing Token = $type");
  
 
  
-
 /**
  * destruir cookies i sessió
 */
@@ -67,8 +62,6 @@ if(!empty($_GET['borrarcookie'])) {
     setcookie($token,'',time()-3600,'/');
     Helpers::flash("S'ha borrat la cookie");
 }
-
-
 
 Helpers::redirect($url);
 

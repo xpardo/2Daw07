@@ -1,4 +1,8 @@
 <?php require_once __DIR__ . "/../vendor/autoload.php"; ?>
+<?php
+  session_start();
+  $_SESSION = $uid;
+?>
 <!DOCTYPE html>
 <html lang="ca">
 
@@ -16,8 +20,23 @@
   
    </header>
 
+
+  
+
+<?php
+if($_SESSION[$uid]) {
+?>
+<?php echo $_SESSION[$uid]; ?>
+Click here to <a href="<?= My\Helpers::url("/web/user/logout.php") ?>">Logout.</a>
+<?php
+}else{?> 
+
    <p>
     <a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a> ||
+<?php
+}
+?>
+
     <a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a>
   </p>
 
