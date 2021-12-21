@@ -19,7 +19,9 @@ $validation = $validator->make($_POST, [
 $validation->validate();
 
 if ($validation->fails()) {
-    // See https://github.com/rakit/validation#working-with-error-message
+    /**
+     *  See https://github.com/rakit/validation#working-with-error-message
+    */
     $errors = $validation->errors();
     $messages = $errors->all();
     foreach ($messages as $message) {
@@ -47,7 +49,9 @@ if ($validation->fails()) {
             $datetime = date('Y-m-d H:i:s');
             $uid = $user["id"];
             
-            // Update user
+            /** 
+            * Update user
+            */
             Helpers::log()->debug("Update user last access");
             $sql = "UPDATE users SET last_access='$datetime' WHERE id=$uid";
             Helpers::log()->debug("SQL: {$sql}");
@@ -56,7 +60,9 @@ if ($validation->fails()) {
             Helpers::log()->debug("User updated");
 
 
-            // Create user session token
+            /* *
+            *Create user session token
+            */
             $token = Token::generate();
             $type = Token::SESSION;
             $sql = "INSERT INTO user_tokens VALUES ($uid, '$token', '$type', '$datetime')";
@@ -69,7 +75,9 @@ if ($validation->fails()) {
 
             // ...
 
-            // Create user session cookie
+            /** 
+            *Create user session cookie
+            */
             session_start();
             $token = "session_token";
             $remember = "remember";

@@ -12,33 +12,34 @@
 
 <body>
    <header>
+   
     <?= My\Helpers::render("/_commons/header.php", ["subtitle" => "Index"]) ?>
     <?= My\Helpers::flash("Required name is empty");?>
-   
-  
 
+
+    <?php
+      if($_SESSION[$uid]) {
+      ?>
+      <?php echo $_SESSION[$uid]; ?>
+         <a href="<?= My\Helpers::url("/web/user/logout.php") ?>">Logout.</a>
+         <a href="<?= My\Helpers::url("/web/user/profile.php") ?>">Perfil.</a>
+      <?php
+      }else{?> 
+
+         <p>
+         <a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a> ||
+         <a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a>
+      </p>
+      <?php
+      }
+      ?>
   
    </header>
 
 
   
 
-<?php
-if($_SESSION[$uid]) {
-?>
-<?php echo $_SESSION[$uid]; ?>
-Click here to <a href="<?= My\Helpers::url("/web/user/logout.php") ?>">Logout.</a>
-Click here to <a href="<?= My\Helpers::url("/web/user/profile.php") ?>">Perfil.</a>
-<?php
-}else{?> 
 
-   <p>
-    <a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a> ||
-    <a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a>
-  </p>
-<?php
-}
-?>
 
   
 
