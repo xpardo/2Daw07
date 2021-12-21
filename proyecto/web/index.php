@@ -28,17 +28,19 @@ if($_SESSION[$uid]) {
 ?>
 <?php echo $_SESSION[$uid]; ?>
 Click here to <a href="<?= My\Helpers::url("/web/user/logout.php") ?>">Logout.</a>
+Click here to <a href="<?= My\Helpers::url("/web/user/profile.php") ?>">Perfil.</a>
 <?php
 }else{?> 
 
    <p>
     <a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a> ||
+    <a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a>
+  </p>
 <?php
 }
 ?>
 
-    <a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a>
-  </p>
+  
 
    <h2>Homepage</h2>
    <p>My first PHP web app works!</p>

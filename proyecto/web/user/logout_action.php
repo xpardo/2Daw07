@@ -2,7 +2,7 @@
 
 session_start();
 $url = Helpers::url("/user/login.php"); 
- 
+use My\Database;
 
 $_SESSION = $uid;
 
