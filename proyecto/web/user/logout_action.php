@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once "/../../scripts/scripuser.php";
 $url = Helpers::url("/user/login.php"); 
 use My\Database;
 

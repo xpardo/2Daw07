@@ -2,6 +2,10 @@
 <?php  session_start();
  // COOKIE / SESSION
 $uid = 1;
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ca">

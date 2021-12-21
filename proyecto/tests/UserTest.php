@@ -22,8 +22,6 @@ final class UserTest extends TestCase
         $db->close();
 
 
-
-
     }
 }
 

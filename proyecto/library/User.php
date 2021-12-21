@@ -1,7 +1,7 @@
 <?php
 
 namespace My;
-
+include("scripuser.php");
 class User
 {
     const token = 'session_token';

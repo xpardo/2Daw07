@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../../vendor/autoload.php";
+require_once "/../../scripts/scripuser.php";
 
 use Rakit\Validation\Validator;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
