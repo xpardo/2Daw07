@@ -87,6 +87,4 @@ class Helpers {
        return self::$_logger;
    }
 
-
-
 }
