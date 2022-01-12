@@ -13,7 +13,7 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-$url = Helpers::url("/user/register.php");
+$url = Helpers::url("/web/user/login.php");
 
 //validador
  

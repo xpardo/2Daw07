@@ -7,7 +7,7 @@ use My\Helpers;
 use My\Database;
 use My\Token;
 
-$url = Helpers::url("/"); // Go to homepage
+$url = Helpers::url("/web"); // Go to homepage
 
 $validator = new Validator();
 
