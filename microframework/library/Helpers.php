@@ -19,7 +19,7 @@ class Helpers {
    public static function url(string $path, bool $ssl = false): string
    {
        $protocol = $ssl ? "https" : "http";
-       return "{$protocol}://localhost/tarda/2Daw07/microframework/web{$path}";
+       return "{$protocol}://localhost/tarda/2Daw07/microframework/{$path}";
    }
    public static function render(string $path, array $__params = []) : string 
    {
