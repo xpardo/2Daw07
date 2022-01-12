@@ -2,7 +2,7 @@
  
 use PHPUnit\Framework\TestCase;
 use My\Mail;
-;
+
 
  
 final class MailTest extends TestCase

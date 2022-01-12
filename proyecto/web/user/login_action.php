@@ -7,7 +7,7 @@ use My\Helpers;
 use My\Database;
 use My\Token;
 
-$url = Helpers::url("/"); // Go to homepage
+$url = Helpers::url("/web"); // Go to homepage
 
 $validator = new Validator();
 
@@ -19,7 +19,9 @@ $validation = $validator->make($_POST, [
 $validation->validate();
 
 if ($validation->fails()) {
-    // See https://github.com/rakit/validation#working-with-error-message
+    /**
+     *  See https://github.com/rakit/validation#working-with-error-message
+    */
     $errors = $validation->errors();
     $messages = $errors->all();
     foreach ($messages as $message) {
@@ -35,8 +37,7 @@ if ($validation->fails()) {
 
         Helpers::log()->debug("Check username and password");
         $db = new Database();
-        $sql = "SELECT * FROM users u 
-                WHERE u.username='$username' AND password='$password'";
+        $sql = "SELECT * FROM users u  WHERE u.username='$username' AND password='$password'";
         Helpers::log()->debug("SQL: {$sql}");
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -48,22 +49,48 @@ if ($validation->fails()) {
             $datetime = date('Y-m-d H:i:s');
             $uid = $user["id"];
             
-            // Update user
+            /** 
+            * Update user
+            */
             Helpers::log()->debug("Update user last access");
-            $sql = "UPDATE users 
-                    SET last_access='$datetime' 
-                    WHERE id=$uid";
+            $sql = "UPDATE users SET last_access='$datetime' WHERE id=$uid";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);
             $stmt->execute();
             Helpers::log()->debug("User updated");
 
-            // Create user session token
-            // ...
+
+            /* *
+            *Create user session token
+            */
+            $token = Token::generate();
+            $type = Token::SESSION;
+            $sql = "INSERT INTO user_tokens VALUES ($uid, '$token', '$type', '$datetime')";
+            Helpers::log()->debug("SQL: {$sql}");
+            $stmt = $db->prepare($sql);            
+            $stmt->execute();
+            Helpers::log()->debug("user session token {$token}");
 
             $db->close();
 
-            // Create user session cookie
+            // ...
+
+            /** 
+            *Create user session cookie
+            */
+            session_start();
+            $coo = "session_token";
+            setcookie($coo,$token,time() + 365*24*60*60,'/');
+            $_SESSION["uid"]=$uid;
+            if(isset($_COOKIE[$coo])) {
+                Helpers::flash("Cookie '" . $coo . "'està establert!<br>");
+                Helpers::flash ("El valor és: " . $_COOKIE[$coo]);
+
+            } else {
+               Helpers::flash("S'anomena galeta '" . $coo . "' no està establert!") ;
+            }
+
+            
             // ...
             
         } else {

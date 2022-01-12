@@ -9,10 +9,7 @@ $uid = 1; // COOKIE / SESSION in next version!!!
 // Load user data from DB
 Helpers::log()->debug("Get user '{$uid}' data");
 $db = new Database();
-$sql = "SELECT u.id, u.username, u.email, f.filepath as avatar
-        FROM users u
-        LEFT JOIN files f ON u.avatar_id=f.id
-        WHERE u.id=$uid";
+$sql = "SELECT u.id, u.username, u.email, f.filepath as avatar FROM users u LEFT JOIN files f ON u.avatar_id=f.id WHERE u.id=$uid";
 Helpers::log()->debug("SQL: {$sql}");
 $stmt = $db->prepare($sql);
 $stmt->execute();

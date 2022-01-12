@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../../vendor/autoload.php";
+require_once "/../../scripts/scripuser.php";
 
 use Rakit\Validation\Validator;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
@@ -34,8 +35,7 @@ if ($validation->fails()) {
     try {
         
         $db = new Database();
-        $sql = "SELECT id FROM users 
-                WHERE email='$email'";
+        $sql = "SELECT id FROM users WHERE email='$email'";
         Helpers::log()->debug("SQL: {$sql}");
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -50,8 +50,7 @@ if ($validation->fails()) {
             Helpers::log()->debug("Creating password recovery token");
             $token = Token::generate();
             $type = Token::RECOVER;
-            $sql = "INSERT INTO user_tokens 
-                    VALUES ($uid, '$token', '$type', '$datetime')";
+            $sql = "INSERT INTO user_tokens  VALUES ($uid, '$token', '$type', '$datetime')";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);            
             $stmt->execute();

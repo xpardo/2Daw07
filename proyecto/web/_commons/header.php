@@ -8,5 +8,8 @@
        <li class="flash__message"><?= $msg ?></li>
        <?php endforeach; ?>
    </ul>
+
+
+   
 </div>
 <?php endif; ?>

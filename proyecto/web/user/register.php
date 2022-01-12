@@ -26,53 +26,50 @@
    <p>Create an account.</p>
 
 
-
-   <div class="container-fluid">
-        <div class="row">
+>
             <div class="container">
             
                 <div class="row">
             
-                <form name="signup" action="<?= My\Helpers::url("/user/register_action.php") ?>" method="post" enctype="multipart/form-data">
-                   
+                    <form name="signup" action="<?= My\Helpers::url("/user/register_action.php") ?>" method="post" enctype="multipart/form-data">
+                    
 
-                <p>
-                    <label>Username</label><br>
-                    <input type="text" name="username" required>
-                </p>
-                <p>
-                    <label>Password</label><br>
-                    <input type="password" name="password" required>
-                </p>
-                <p>
-                    <label>Repeat password</label><br>
-                    <input type="password" name="confirm_password" required>
-                </p>
-                <p>
-                    <label>E-mail</label><br>
-                    <input type="email" name="email" required>
-                </p>
-                <p>
-                    <label>Image</label><br>
-                    <input type="file" name="avatar">
-                </p>
-                <p>
-                    <label>
-                        <input type="checkbox" name="terms" required>
-                        I agree to the <a href="<?= My\Helpers::url("/terms.php")  ?>">terms and conditions</a>
-                    </label>
-                </p>
-                <p>
-                    <button>Sign up</button>
-                    <button type="reset">Reset form</button>
-                </p>
+                        <p>
+                            <label>Username</label><br>
+                            <input type="text" name="username" required>
+                        </p>
+                        <p>
+                            <label>Password</label><br>
+                            <input type="password" name="password" required>
+                        </p>
+                        <p>
+                            <label>Repeat password</label><br>
+                            <input type="password" name="confirm_password" required>
+                        </p>
+                        <p>
+                            <label>E-mail</label><br>
+                            <input type="email" name="email" required>
+                        </p>
+                        <p>
+                            <label>Image</label><br>
+                            <input type="file" name="avatar">
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="terms" required>
+                                I agree to the <a href="<?= My\Helpers::url("/terms.php")  ?>">terms and conditions</a>
+                            </label>
+                        </p>
+                        <p>
+                            <button>Sign up</button>
+                            <button type="reset">Reset form</button>
+                        </p>
                                 
 
                     </form>
         
                 </div>
-            </div>
-        </div>
+           
         <br>
         <p>Anar al <a href="<?= My\Helpers::url("/web/user/login.php") ?>">login</a></p>
     </div> 

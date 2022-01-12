@@ -1,5 +1,12 @@
 <?php require_once __DIR__ . "/../../vendor/autoload.php"; ?>
+<?php  session_start();
+ // COOKIE / SESSION
+$uid = 1;
 
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="ca">
 <?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Sign in"]) ?>
@@ -26,38 +33,56 @@
         <li>IP address: <?= getHostByName(getHostName()) ?></li>
     </ul>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="container">
-                <div class="row">
+    
+       
+        <div class="container">
+            <div class="row">
 
-                    <form name="login" action="<?= My\Helpers::url("/user/login_action.php") ?>" method="post">
+                <form name="login" action="<?= My\Helpers::url("/web/user/login_action.php") ?>" method="post">
 
-                        <p>
-                            <label id="username">username</label>
-                            <input type="text" name="username"  >
-                        </p>
-                        <p>
-                            <label id="password">Contrasenya</label>
-                            <input type="password" name="password" >
-                        </p>
-                        <p>
-                            <label>
-                                <input type="checkbox" name="remember">Remember me
-                            </label>
-                        </p>
-                        <p>
-                            <button>Sign in</button>
-                            <button type="reset">Reset form</button>
-                        </p>
+                    <p>
+                        <label id="username">username</label>
+                        <input type="text" name="username"  >
+                    </p>
+                    <p>
+                        <label id="password">Contrasenya</label>
+                        <input type="password" name="password" >
+                    </p>
+                    <p>
+                        <label>
+                            <input type="checkbox" name="remember">Remember me
+                        </label>
+                    </p>
+                    <p>
+                        <button>Sign in</button>
+                        <button type="reset">Reset form</button>
+                    </p>
 
-                    </form>
-                </div>
+                </form>
+                
+                
+            </div>
+            <p>Si ancara no t'as registrat -><a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a></p>
+        
+       
+        <br>
+  
+                
+    </div>
+    
+        <div class="container">
+            <div class="row">
+            
+                <form name="logout" action="<?= My\Helpers::url("/user/logout_action.php") ?>" method="post">
+                    <p>
+                        <a href="'.$_SERVER['PHP_SELF'].'?borrarcookie=1">logout</a>
+                    </p>
+                    
+                </form>
             </div>
         </div>
-        <br>
-         <p>Si ancara no t'as registrat -><a href="<?= My\Helpers::url("/web/user/register.php") ?>">register</a></p>
-    </div>
+       
+    
 
     
     <br>

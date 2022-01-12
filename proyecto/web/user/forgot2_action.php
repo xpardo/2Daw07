@@ -39,8 +39,7 @@ if ($validation->fails()) {
 
         Helpers::log()->debug("Search user using token");
         $db = new Database();
-        $sql = "SELECT user_id FROM user_tokens 
-                WHERE token='$token' AND type='$type'";
+        $sql = "SELECT user_id FROM user_tokens  WHERE token='$token' AND type='$type'";
         Helpers::log()->debug("SQL: {$sql}");
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -54,9 +53,7 @@ if ($validation->fails()) {
 
             // Update user
             Helpers::log()->debug("Changing user password");
-            $sql = "UPDATE users 
-                    SET password='$password', last_access='$datetime' 
-                    WHERE id=$uid";
+            $sql = "UPDATE users SET password='$password', last_access='$datetime' WHERE id=$uid";
             Helpers::log()->debug("SQL: {$sql}");
             $stmt = $db->prepare($sql);
             $stmt->execute();
