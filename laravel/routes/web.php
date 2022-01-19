@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('sendemail', 'SendEmailController@index')->name('sendemail');
+Route::get('mail/test', [MailController::class, 'test']);
+// or
+// Route::get('mail/test', 'App\Http\Controllers\MailController@test');
