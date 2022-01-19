@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TestMail extends Mailable
 {
-	use Queueable, SerializesModels;
+	/* use Queueable, SerializesModels; */
 	
 	public function __construct(array $content)
    {
