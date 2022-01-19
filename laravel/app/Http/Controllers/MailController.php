@@ -15,7 +15,7 @@
                 'body' => 'Testing mail',
                 'url'  => '/'
             ]);
-            \Mail::to('xpullodsmx@gmail.com')->send($mail);
+            \Mail::to('xepaul@fp.insjoaquimmir.cat')->send($mail);
             echo '<h1>Mail send successfully</h1>';
         } catch (\Exception $e) {
             echo '<pre>Error - ' . $e .'</pre>';

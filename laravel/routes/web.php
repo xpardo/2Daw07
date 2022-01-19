@@ -19,7 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('mail/test', [MailController::class, 'test']);
 // or
 // Route::get('mail/test', 'App\Http\Controllers\MailController@test');
