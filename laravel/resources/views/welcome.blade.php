@@ -20,7 +20,9 @@
             }
         </style>
     </head>
+    
     <body class="antialiased">
+    @include('flash')
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -128,5 +130,15 @@
                 </div>
             </div>
         </div>
+<!--pie pagina-->
+        <footer>
+
+            <nav class="navbar fixed-bottom  justify-content-center" style="background-color: #b08fee;">
+                <p><a class="nav-link disabled" href="#" >2DAW 2021-2022</a></p>
+                <p><a class="nav-link disabled" href="https://agora.xtec.cat/iesjoaquimmir/">Institut joaquim mir</a></p>
+                <p><a class="nav-link disabled" >Xenia Pardo | Grup 08</a></p>
+            </nav>
+
+        </footer>
     </body>
 </html>
