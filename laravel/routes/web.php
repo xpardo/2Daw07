@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\MailController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +19,19 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function (Request $request) {
-    $message = 'Loading , welcome my page';
+    $message = 'Loading welcome page';
     Log::info($message);
-    $request -> session()->flash('info', $message);
+    $request->session()->flash('info', $message);
     return view('welcome');
-});
+ });
+ 
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+// ...
 Route::get('mail/test', [MailController::class, 'test']);
 // or
 // Route::get('mail/test', 'App\Http\Controllers\MailController@test');
