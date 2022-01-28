@@ -24,6 +24,7 @@
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            
             </div>
 
             <!-- Password -->
@@ -49,6 +50,7 @@
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
+              
 
                 <x-button class="ml-4">
                     {{ __('Register') }}

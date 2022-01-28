@@ -32,6 +32,10 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 // ...
-Route::get('mail/test', [MailController::class, 'test']);
+Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 // or
 // Route::get('mail/test', 'App\Http\Controllers\MailController@test');
+
+
+/// "username"  => "2daw.equip08@fp.insjoaquimmir.cat",
+///"password"  => "9LeQr>7j",
