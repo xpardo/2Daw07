@@ -37,5 +37,3 @@ Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 // Route::get('mail/test', 'App\Http\Controllers\MailController@test');
 
 
-/// "username"  => "2daw.equip08@fp.insjoaquimmir.cat",
-///"password"  => "9LeQr>7j",

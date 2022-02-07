@@ -20,7 +20,6 @@ class TestMail extends Mailable
        // pass here your email template file
        return $this->markdown('mails.testmail')
            ->with('content', $this->content);
-           $request->user()->sendEmailVerificationNotification();
 
    }
 
