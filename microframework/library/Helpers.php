@@ -72,6 +72,7 @@ class Helpers {
        return $list;
    }
 
+   
    public static function log() : Logger
    {
        // Lazy loading pattern

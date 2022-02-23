@@ -1,0 +1,1 @@
+{"version":1,"defects":{"VendorFarmTest::testCow":4,"VendorFarmTest::testTux":3,"MailTest::testConstructor":4,"MailTest::testSend":4},"times":{"HelpersTest::testExpectedText":0.001,"VendorFarmTest::testCow":0.015,"VendorFarmTest::testTux":0,"HelpersTest::testhttp":0.002,"MailTest::testConstructor":0.024,"MailTest::testSend":0,"HelpersTest::testLog":0.053}}
