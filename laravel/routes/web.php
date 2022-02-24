@@ -42,4 +42,18 @@ Route::get('/tickets/{ticket}', [TicketsController::class,'show']);
 Route::put('/tickets/{ticket}', [TicketsController::class,'update']);
 Route::delete('/tickets/{ticket}', [TicketsController::class,'destroy']);
 
+<<<<<<< HEAD
 Route::resource('/tickets',TicketsController::class);
+=======
+Route::post('/tickets', [TicketsController::class,'store']);
+Route::get('/tickets', [TicketsController::class,'index']);
+Route::get('/tickets/{ticket}', [TicketsController::class,'show']);
+
+
+Route::get('/tickets', [TicketsController::class,'create']);
+
+
+Route::get('/tickets/{id}', [TicketsController::class,'delete']);
+Route::get('/ticketst/{id}', [TicketsController::class,'edit']);
+Route::post('/tickets', [TicketsController::class,'update']);
+>>>>>>> 1ca3ec147ecf5d54e5b18289b88ae302a288d279
