@@ -1,5 +1,5 @@
 
-<form action="{{url("updatetickets")}}" method="post">
+<form action="{{url("updateticket")}}" method="post">
 
 @csrf
 
