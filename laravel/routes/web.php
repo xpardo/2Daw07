@@ -36,10 +36,10 @@ Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 // or
 // Route::get('mail/test', 'App\Http\Controllers\MailController@test');
 
+Route::post('/tickets', [TicketsController::class,'store']);
+Route::get('/tickets', [TicketsController::class,'index']);
+Route::get('/tickets/{ticket}', [TicketsController::class,'show']);
+Route::put('/tickets/{ticket}', [TicketsController::class,'update']);
+Route::delete('/tickets/{ticket}', [TicketsController::class,'destroy']);
 
-Route::get('listaTicket', [TicketsController::class,'index'])->name("listaTicket"); 
-Route::get('formAddticket', [TicketsController::class,'create']);
-Route::post('storeticket', [TicketsController::class,'store']);
-Route::get('deleteticket/{id}', [TicketsController::class,'delete']);
-Route::get('editticket/{id}', [TicketsController::class,'edit']);
-Route::post('updateticket', [TicketsController::class,'update']);
+Route::resource('/tickets',TicketsController::class);
