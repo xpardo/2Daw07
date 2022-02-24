@@ -57,7 +57,8 @@ class TicketsController extends Controller
         ]);
         //
        
-    /*     $data->validate([
+    /*  
+        $data->validate([
             'status_id' => 'required',
         ]);
         $data->validate([
@@ -66,8 +67,10 @@ class TicketsController extends Controller
  */
 
         $ticket = Ticket::create($data->all());
-       /*  $status = status::create($data->all());
-        $user = user::create($data->all()); */
+       /*  
+       $status = status::create($data->all());
+        $user = user::create($data->all()); 
+        */
         return ["ok" => "vale"];
         return \response($ticket/* ,$status,$user */);
     }
@@ -86,8 +89,10 @@ class TicketsController extends Controller
     {
         //
         $ticket = Ticket::fTndOrFail($id);
-     /*    $status = status::fTndOrFail($status_id);
-        $autho = status::fTndOrFail($author_id); */
+     /*   
+        $status = status::fTndOrFail($status_id);
+        $autho = status::fTndOrFail($author_id); 
+    */
         return \response(ticket,status,);
    }
 
