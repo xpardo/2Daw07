@@ -22,7 +22,7 @@ class TicketsController extends Controller
     {
         //
         $tickets = Ticket::all();
-
+        return \response($tickets);
 
         
         /* $data["test"]=["vamos bien"];
@@ -65,9 +65,10 @@ class TicketsController extends Controller
         ]);
        
        
-    
-
+      
         $ticket = Ticket::create($data->all());
+      return \response($ticket);
+
         return redirect('/tickets/'. $ticket -> id);
      
     }
@@ -84,9 +85,11 @@ class TicketsController extends Controller
 
         $post -> update($data);
         return redirect('/tickets/'. $ticket -> id);
+        $ticket = Ticket::create($request->all());
+        return \reponse($ticket);
     }
 
-    public function update(Request $request)
+    public function update(Request $request , $id)
     {
        
             $response = $this->put('/tickets/'.$ticket->id, [
@@ -100,7 +103,9 @@ class TicketsController extends Controller
             $ticket=Ticket::create($data);
             return redirect('/tickets/'. $ticket -> id);
     
-    
+            $ticket = Ticket::findOrFail($id)
+            ->update($request->all());
+            return \reponse($ticket);
 
     }
 
@@ -116,13 +121,15 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ticket $ticket)
+    public function destroy(Ticket $ticket,$id)
     {
         //
         $ticket -> delete();
      
         return redirect('/tickets/');
 
+            ticket::destroy($id);
+            return \response("la id:${id} ha sigut eliminat");
 
     }
 }
