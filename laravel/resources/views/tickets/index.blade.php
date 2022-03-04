@@ -16,25 +16,34 @@
 <table>
     <tr>
         <td>id </td>
-        <td>titlde </td>
+        <td>title </td>
         <td>desc </td>
         <td>author_id </td>
         <td>assigned_id </td>
         <td>status_id </td>
-    
+
+        <td>comment : author_id </td>
+        <td>comment : ticket_id </td>
+        <td>comment : msg </td>
+
+        <td>status : name </td>
+
         <td>edit </td>
         <td>delete </td>
     </tr>
-    @foreach ($ticket as $tickets)
+    @foreach ($tickets as $ticket && $comments as $comment && $statuses as $status )
         <tr>
             <td>{{$ticket->id }}</td>
-            <td>{{$ticket->titlde }}</td>
+            <td>{{$ticket->title }}</td>
             <td>{{$ticket->desc }}</td>
             <td>{{$ticket->author_id }}</td>
             <td>{{$ticket->assigned_id }}</td>
             <td>{{$ticket->status_id }}</td>
-         
-            <td><a href="{{url("editicket")}}/{{$ticket->id}}">edit </a></td>
+            <td>{{$comment->author_id }}</td>
+            <td>{{$comment->ticket_id }}</td>
+            <td>{{$comment->msg }}</td>
+            <td>{{$status->name }}</td>
+            <td><a href="{{url("editticket")}}/{{$ticket->id}}">edit </a></td>
             <td><a href="{{url("deleteticket")}}/{{$ticket->id}}">delete </a></td>
         </tr>
     @endforeach

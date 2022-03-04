@@ -25,8 +25,8 @@ class TestTicket extends Ticketlable{
 		$this->content = $content;
     }
 
-    /** @test */
-    public function list_of_tickets_can_be_retrived()
+    /** @test list*/
+    public function list_of_tickets_an_api_can_be_retrived()
     {
         $this -> withoutExceptionHandling();
         factory(Ticket::class)->create(); // datos de prueba
@@ -35,11 +35,12 @@ class TestTicket extends Ticketlable{
 
         $ticket = Ticket::all();
 
-        $response -> assertViewIs('tiquet.index');
-        $response -> assertViewHas('tiquet'. $tiquets);
+        $response -> assertViewIs('tickets.index');
+        $response -> assertViewHas('tickets'. $tickets);
     }
 
-    public function a_ticket_can_be_retrived()
+    /** @test retrived */
+    public function a_ticket_api_an_can_be_retrived()
     {
         $this -> withoutExceptionHandling();
         $ticket=factory(Ticket::class)->create(); // datos de prueba
@@ -48,34 +49,29 @@ class TestTicket extends Ticketlable{
 
         $ticket = Ticket::first();
 
-        $response -> assertViewIs('tiquet.show');
-        $response -> assertViewHas('tiquet'. $tiquets);
+        $response -> assertViewIs('tickets.show');
+        $response -> assertViewHas('tickets'. $tickets);
     }
 
-
-
-
-    /** @test */
-    public function  a_ticket_can_be_created()
+    /** @test create*/
+    public function  a_ticket_an_api_can_be_created()
     {
         $this -> withoutExceptionHandling();
         
-
-
-        $response = $this->tiket('/atickets', [
+        $response = $this->postJson('/tickets', [
             'title' => 'aixo es un ticket',
             'desc' => 'Tinc una incidencia',
-            'author_id'=> 1,
+            'author_id'=> 10,
             'assigned_id'=>1,
             'status_id'=>1,
-            ]);
+        ]);
 
-        $this-> assertCout(1, ticket::all());
-        $ticket = ticket::first();
+        $this-> assertCout(1, Ticket::all());
+        $ticket = Ticket::first();
 
          $this -> assertEquals($ticket ->title,'aixo es un ticket');
          $this -> assertEquals($ticket ->desc,'Tinc una incidencia');
-         $this -> assertEquals($ticket ->author_id,1);
+         $this -> assertEquals($ticket ->author_id,10);
          $this -> assertEquals($ticket ->assigned_id,1);
          $this -> assertEquals($ticket ->status_id,1);
 
@@ -84,34 +80,100 @@ class TestTicket extends Ticketlable{
 
     }
 
-    /** @test */
-    public function ticket_title_is_required(){
+    /** @test title*/
+    public function ticket_title_an_api_is_required(){
         $this -> withoutExceptionHandling();
         
 
 
-        $response = $this->tiket('/atickets', [
+        $response = $this->postJson('/atickets', [
             'title' => '',
             'desc' => 'Tinc una incidencia',
-            'author_id'=> 1,
+            'author_id'=> 10,
             'assigned_id'=>1,
             'status_id'=>1,
-            ]);
+        ]);
 
-            $response -> assertSessionHasErrors(['title']);
+        $response -> assertSessionHasErrors(['title']);
     }
 
-    /** @test */
-    public function  a_ticket_can_be_update()
+    /** @test desc*/
+
+    public function ticket_desc_an_api_is_required(){
+        $this -> withoutExceptionHandling();
+        
+        $response = $this->postJson('/atickets', [
+            'title' => 'aixo es un ticket',
+            'desc' => '',
+            'author_id'=> 10,
+            'assigned_id'=>1,
+            'status_id'=>1,
+        ]);
+
+        $response -> assertSessionHasErrors(['desc']);
+    }
+
+     /** @test author_id*/
+
+
+    public function ticket_author_an_api_id_is_required(){
+        $this -> withoutExceptionHandling();
+        
+        $response = $this->postJson('/atickets', [
+            'title' => 'aixo es un ticket',
+            'desc' => 'Tinc una incidencia',
+            'author_id'=> '',
+            'assigned_id'=>1,
+            'status_id'=>1,
+        ]);
+
+        $response -> assertSessionHasErrors(['author_id']);
+    }
+
+    /** @test assigned_id*/
+    public function ticket_assigned_an_api_id_is_required(){
+        $this -> withoutExceptionHandling();
+        
+        $response = $this->postJson('/atickets', [
+            'title' => 'aixo es un ticket',
+            'desc' => 'Tinc una incidencia',
+            'author_id'=> 10,
+            'assigned_id'=>'',
+            'status_id'=>1,
+        ]);
+
+        $response -> assertSessionHasErrors(['assigned_id']);
+    }
+
+    /** @test status_id*/
+    public function ticket_status_an_api_id_is_required(){
+        $this -> withoutExceptionHandling();
+        
+        $response = $this->postJson('/atickets', [
+            'title' => 'aixo es un ticket',
+            'desc' => 'Tinc una incidencia',
+            'author_id'=> 10,
+            'assigned_id'=>1,
+            'status_id'=>'',
+        ]);
+
+        $response -> assertSessionHasErrors(['status_id']);
+    }
+
+
+
+
+    /** @test update*/
+    public function  a_ticket_an_api_can_be_update()
     {
         $this -> withoutExceptionHandling();
 
         $ticket = factory(Ticket::class)->create(); // datos de prueba
         
-        $response = $this->put('/tickets/'.$ticket->id, [
+        $response = $this->postJson('/tickets/'.$ticket->id, [
             'title' => 'aixo es un ticket',
             'desc' => 'Tinc una incidencia',
-            'author_id'=> 1,
+            'author_id'=> 10,
             'assigned_id'=>1,
             'status_id'=>1,
         ]);
@@ -129,8 +191,8 @@ class TestTicket extends Ticketlable{
 
     }
 
-    /** @test */
-    public function  a_ticket_can_be_deleted()
+    /** @test deleted*/
+    public function  a_ticket_an_api_can_be_deleted()
     {
         $this -> withoutExceptionHandling();
 
@@ -144,5 +206,19 @@ class TestTicket extends Ticketlable{
 
     }
 
+     /** @test api*/
+     public function ticket_making_an_api_request()
+     {
+       
+        $response = $this->postJson('/tickets/'.$ticket->id, [
+            'title' => 'aixo es un ticket',
+            'desc' => 'Tinc una incidencia',
+            'author_id'=> 10,
+            'assigned_id'=>1,
+            'status_id'=>1,
+        ]);
+        $this->assertTrue($response['created']);
+
+     }
 
 }

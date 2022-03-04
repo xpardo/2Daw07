@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
  
-
+Route::resource('/index',TicketsController::class)->middleware("auth:api");
 Route::apiResource('tasks', TaskController::class);
 
 
@@ -31,9 +31,16 @@ Route::get('/test',function(){
 });
 
 
-/* Route::apiResource('usuaris', UsuariController::class); */
+
 
 Route::apiResource('tickets',TicketsController::class);
+Route::apiResource('tickets/{tid}/comments',TicketsController::class);
+Route::apiResource('tickets/{tid}/statuses',TicketsController::class);
 
-Route::apiResource('tickets/{id}/statuses',TicketsController::class);
-Route::apiResource('tickets/{id}/users',TicketsController::class);
+
+
+
+Route::apiResource('comments',TicketsController::class);
+Route::apiResource('statuses',TicketsController::class);
+
+

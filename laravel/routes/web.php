@@ -39,7 +39,26 @@ Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 Route::post('/tickets', [TicketsController::class,'store']);
 Route::get('/tickets', [TicketsController::class,'index']);
 Route::get('/tickets/{ticket}', [TicketsController::class,'show']);
+Route::get('/tickets/{ticket}', [TicketsController::class,'create']);
 Route::put('/tickets/{ticket}', [TicketsController::class,'update']);
 Route::delete('/tickets/{ticket}', [TicketsController::class,'destroy']);
 
 Route::resource('/tickets',TicketsController::class);
+
+Route::post('/tickets/{tid}/comments', [TicketsController::class,'store']);
+Route::get('/tickets/{tid}/comments', [TicketsController::class,'index']);
+Route::get('/tickets/{tid}/comments/{ticket}', [TicketsController::class,'show']);
+Route::post('/tickets/{tid}/comments/{ticket}', [TicketsController::class,'create']);
+Route::put('/tickets/{tid}/comments/{ticket}', [TicketsController::class,'update']);
+Route::delete('/tickets/{tid}/comments/{ticket}', [TicketsController::class,'destroy']);
+
+Route::resource('/tickets/{tid}/comments',TicketsController::class);
+
+Route::post('/tickets/{tid}/statuses', [TicketsController::class,'store']);
+Route::get('/tickets/{tid}/statuses', [TicketsController::class,'index']);
+Route::get('/tickets/{tid}/statuses/{ticket}', [TicketsController::class,'show']);
+Route::post('/tickets/{tid}/statuses/{ticket}', [TicketsController::class,'create']);
+Route::put('/tickets/{tid}/statuses/{ticket}', [TicketsController::class,'update']);
+Route::delete('/tickets/{tid}/statuses/{ticket}', [TicketsController::class,'destroy']);
+
+Route::resource('/tickets/{tid}/statuses',TicketsController::class);
