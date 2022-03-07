@@ -47,6 +47,7 @@ class TicketsController extends Controller
         return \response($statuses);
 
         return view('/tickets/{tid}/statuses/.index', compact('statuses'));
+
     }
 
 
@@ -108,8 +109,7 @@ class TicketsController extends Controller
         */
 
         $stat  = request()->validate([
-            'name' => 'required|max:30',
-            
+            'name' => 'required|max:30',   
         ]); 
         $status = Status::create($stat->all());
         return \response($status);
@@ -236,7 +236,7 @@ class TicketsController extends Controller
         */
 
         $comm = Comment::find($id);
-        $comment ["comment"]=$comment;
+        $comment ["/tickets/{tid}/comments/"]=$comment;
         return view('/tickets/{tid}/comments/.formEdit',$comment);
     }
 
