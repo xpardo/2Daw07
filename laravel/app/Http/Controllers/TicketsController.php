@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Models\Ticket;
 
@@ -59,15 +59,15 @@ class TicketsController extends Controller
         
         $ticket = Ticket::findOrFail($id);
         return \response($ticket);
-        return view('tickets.show', compact('ticket'));
+
 
         $comments = Comment::findOrFail($id);
         return \response($comments);
-        return view('/tickets/{tid}/comments/.show',compact('comment'));
+
 
         $statuses = Status::findOrFail($id);
         return \response($ticket);
-        return view('/tickets/{tid}/statuses/.show',compact('status'));
+        
 
     } 
 
@@ -87,9 +87,9 @@ class TicketsController extends Controller
         ]);
       
         $ticket = Ticket::create($tick->all());
-        return \response($ticket);
+        return \response($ticket,201);
 
-        return redirect('/tickets/'. $ticket -> id);
+       
 
        /**
         * comments
@@ -100,9 +100,9 @@ class TicketsController extends Controller
             'msg'=> 'required|max:255'
         ]); 
         $comment = Comment::create($comm->all());
-        return \response($comment);
+        return \response($comment,201);
 
-        return redirect('/tickets/{tid}/comments/'. $comment -> id);
+
 
         /**
         * status
@@ -112,9 +112,9 @@ class TicketsController extends Controller
             'name' => 'required|max:30',   
         ]); 
         $status = Status::create($stat->all());
-        return \response($status);
+        return \response($status,201);
 
-        return redirect('/tickets/{tid}/statuses/'. $status -> id);
+        
     }
 
 
@@ -246,9 +246,6 @@ class TicketsController extends Controller
     public function destroy(Ticket $ticket,$id)
     {
         
-        $ticket -> delete();
-     
-        return redirect('/tickets/');
 
         Ticket::destroy($id);
         return \response("la id:${id} ha sigut eliminat");

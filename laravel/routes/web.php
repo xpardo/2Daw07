@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\MailController;
-use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\SeguretatsController;
 
 
 /*
@@ -24,6 +24,8 @@ Route::get('/', function (Request $request) {
     $request->session()->flash('info', $message);
     return view('welcome');
  });
+ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
  
 
 Route::get('/dashboard', function () {
@@ -35,30 +37,9 @@ require __DIR__.'/auth.php';
 Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 // or
 // Route::get('mail/test', 'App\Http\Controllers\MailController@test');
+Auth::routes();
 
-Route::post('/tickets', [TicketsController::class,'store']);
-Route::get('/tickets', [TicketsController::class,'index']);
-Route::get('/tickets/{ticket}', [TicketsController::class,'show']);
-Route::get('/tickets/{ticket}', [TicketsController::class,'create']);
-Route::put('/tickets/{ticket}', [TicketsController::class,'update']);
-Route::delete('/tickets/{ticket}', [TicketsController::class,'destroy']);
 
-Route::resource('/tickets',TicketsController::class);
+Route::get('securitys', [SeguretatsController::class,'index'])->name("securitys"); ;
 
-Route::post('/tickets/{tid}/comments', [TicketsController::class,'store']);
-Route::get('/tickets/{tid}/comments', [TicketsController::class,'index']);
-Route::get('/tickets/{tid}/comments/{ticket}', [TicketsController::class,'show']);
-Route::post('/tickets/{tid}/comments/{ticket}', [TicketsController::class,'create']);
-Route::put('/tickets/{tid}/comments/{ticket}', [TicketsController::class,'update']);
-Route::delete('/tickets/{tid}/comments/{ticket}', [TicketsController::class,'destroy']);
 
-Route::resource('/tickets/{tid}/comments',TicketsController::class);
-
-Route::post('/tickets/{tid}/statuses', [TicketsController::class,'store']);
-Route::get('/tickets/{tid}/statuses', [TicketsController::class,'index']);
-Route::get('/tickets/{tid}/statuses/{ticket}', [TicketsController::class,'show']);
-Route::post('/tickets/{tid}/statuses/{ticket}', [TicketsController::class,'create']);
-Route::put('/tickets/{tid}/statuses/{ticket}', [TicketsController::class,'update']);
-Route::delete('/tickets/{tid}/statuses/{ticket}', [TicketsController::class,'destroy']);
-
-Route::resource('/tickets/{tid}/statuses',TicketsController::class);

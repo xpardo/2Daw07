@@ -14,6 +14,6 @@
             </div>
         </div>
     </div>
-    <a href="{{url('listaTicket')}}">CRUD ticket</a>
+    <a href="{{url('security')}}">CRUD de seguretat</a>
 </x-app-layout>
 

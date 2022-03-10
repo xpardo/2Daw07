@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '186bf750a1af383126b334677b5ce545435d2929',
+        'reference' => '3daa2c0570320da8f4356bfeac126f8c0386c3c5',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -409,7 +409,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '186bf750a1af383126b334677b5ce545435d2929',
+            'reference' => '3daa2c0570320da8f4356bfeac126f8c0386c3c5',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -446,6 +446,15 @@
             'install_path' => __DIR__ . '/../laravel/tinker',
             'aliases' => array(),
             'reference' => '5f2f9815b7631b9f586a3de7933c25f9327d4073',
+            'dev_requirement' => false,
+        ),
+        'laravel/ui' => array(
+            'pretty_version' => 'v3.4.2',
+            'version' => '3.4.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/ui',
+            'aliases' => array(),
+            'reference' => 'e01198123f7f4369d13c1f83a897c3f5e97fc9f4',
             'dev_requirement' => false,
         ),
         'lcobucci/jwt' => array(
