@@ -40,6 +40,6 @@ Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 Auth::routes();
 
 
-Route::get('securitys', [SeguretatsController::class,'index'])->name("securitys"); ;
+Route::get('securitys', [SeguretatsController::class,'index'])->name("securitys");
 
 

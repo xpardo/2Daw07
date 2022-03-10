@@ -14158,3 +14158,42 @@ Did you mean one of these?
 #28 {main}
 "} 
 [2022-03-10 14:25:07] local.INFO: Loading welcome page  
+[2022-03-10 14:32:52] local.ERROR: Too many arguments to "ui" command, expected arguments "type". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Too many arguments to \"ui\" command, expected arguments \"type\". at /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Input/ArgvInput.php:193)
+[stacktrace]
+#0 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Input/ArgvInput.php(86): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument()
+#1 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Input/ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#2 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Input/Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Command/Command.php(257): Symfony\\Component\\Console\\Input\\Input->bind()
+#4 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\\Component\\Console\\Command\\Command->run()
+#5 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php(1005): Illuminate\\Console\\Command->run()
+#6 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand()
+#7 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun()
+#8 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\\Component\\Console\\Application->run()
+#9 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
+#10 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#11 {main}
+"} 
+[2022-03-10 14:33:10] local.ERROR: Command "type" is not defined. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"type\" is not defined. at /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php:709)
+[stacktrace]
+#0 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php(259): Symfony\\Component\\Console\\Application->find()
+#1 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun()
+#2 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\\Component\\Console\\Application->run()
+#3 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
+#4 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#5 {main}
+"} 
+[2022-03-10 14:52:25] local.ERROR: Too many arguments to "ui" command, expected arguments "type". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Too many arguments to \"ui\" command, expected arguments \"type\". at /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Input/ArgvInput.php:193)
+[stacktrace]
+#0 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Input/ArgvInput.php(86): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument()
+#1 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Input/ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#2 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Input/Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Command/Command.php(257): Symfony\\Component\\Console\\Input\\Input->bind()
+#4 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\\Component\\Console\\Command\\Command->run()
+#5 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php(1005): Illuminate\\Console\\Command->run()
+#6 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand()
+#7 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun()
+#8 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\\Component\\Console\\Application->run()
+#9 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
+#10 /home/tarda/Escriptori/Daw2/M7/2Daw07/laravel/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#11 {main}
+"} 
