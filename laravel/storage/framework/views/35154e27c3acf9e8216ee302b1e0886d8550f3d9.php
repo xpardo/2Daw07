@@ -8,6 +8,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <?php echo e(__('Dashboard')); ?>
 
+            
         </h2>
      <?php $__env->endSlot(); ?>
 
@@ -16,11 +17,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in!
+
+                    <a href="<?php echo e(url('files.index')); ?>"><u>Registrarse</u></a>
                 </div>
             </div>
         </div>
     </div>
-    <a href="<?php echo e(url('security')); ?>">CRUD de seguretat</a>
+   
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>

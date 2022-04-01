@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SeguretatsController;
 
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +38,17 @@ require __DIR__.'/auth.php';
 Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 // or
 // Route::get('mail/test', 'App\Http\Controllers\MailController@test');
+
+
+
+
+Route::resource('files', FileController::class);
+Route::get('create', [FileController::class,'create']);
+Route::post('store', [FileController::class,'store']);
+Route::get('edit/{id}', [FileController::class,'edit']);
+Route::post('update', [FileController::class,'update']);
+Route::get('delete/{id}', [FileController::class,'destroy']);
+
 Auth::routes();
 
-
-Route::get('securitys', [SeguretatsController::class,'index'])->name("securitys");
-
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

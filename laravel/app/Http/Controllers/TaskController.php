@@ -37,7 +37,7 @@ class TaskController extends Controller
             'descripcion' => 'required|max:255',
             'status' => 'required'
         ]);
-        $task = Task::create($request->all());
+        $task = Task::create($request->all(201));
         return ["hola" => "vale"];
         return \response($task);
 
