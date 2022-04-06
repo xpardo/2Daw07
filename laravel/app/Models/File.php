@@ -12,8 +12,7 @@ class File extends Model
     use HasFactory;
 
     protected $fillable = [
-        'Filepath',
-        'Filesize',
+        'upload',
         'Created',
         'Updated'
     ];

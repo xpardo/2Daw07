@@ -1,0 +1,15 @@
+use Illuminate\Support\Facades\Storage;
+ 
+Storage::disk('avatars/1')->put('example.txt', 'contents');
+
+$disk = $torage:build([
+    'driver' => 'local',
+    'root' => '/path/to/root',
+])
+
+$disk->put('images.jpg',$contents)
+
+'links' => [
+    public_path('storage') => storage_path('app/public'),
+    public_path('images') => storage_path('app/images'),
+],

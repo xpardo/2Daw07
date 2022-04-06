@@ -46,7 +46,7 @@ Route::resource('files', FileController::class);
 Route::get('create', [FileController::class,'create']);
 Route::post('store', [FileController::class,'store']);
 Route::get('edit/{id}', [FileController::class,'edit']);
-Route::post('update', [FileController::class,'update']);
+Route::put('update', [FileController::class,'update']);
 Route::get('delete/{id}', [FileController::class,'destroy']);
 
 Auth::routes();

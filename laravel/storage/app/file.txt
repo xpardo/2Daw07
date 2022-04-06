@@ -1,0 +1,5 @@
+Storage::disk('local')->put('file.txt', 'Contents');
+
+Storage::disk('s3')->put('avatars/1', $fileContents);
+
+$contents=Storage::get('file.jpg');
