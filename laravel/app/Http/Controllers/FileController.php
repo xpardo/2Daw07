@@ -147,17 +147,6 @@ class FileController extends Controller
         return redirect()->route('files.index')
             ->with('success','file updated successfully');
 
-
-  
-    
-        
-
-
-                       
- 
-
-    
-        
     
     }
 
@@ -176,7 +165,7 @@ class FileController extends Controller
     
   
         return redirect()->route('files.index')
-        ->with('success','file updated successfully');
+        ->with('success','file delete successfully');
 
 
     }

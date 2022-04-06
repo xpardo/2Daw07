@@ -37,4 +37,5 @@
         </form></td>
         
     </div>
+    @include('footer') 
 @endsection
