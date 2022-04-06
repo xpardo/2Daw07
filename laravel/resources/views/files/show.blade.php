@@ -29,7 +29,12 @@
         </div>
 
         <td><a class="btn btn-warning"  href="{{ route("files.edit", $file) }}">edit </a></td>
-        <td><a class="btn btn-danger" href="{{ route("files.destroy", $file->id) }}">delete </a></td>
+        <td> <form action="{{ route('files.destroy',$file) }}" method="POST">   
+                                
+            @csrf
+            @method('DELETE')      
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form></td>
         
     </div>
 @endsection

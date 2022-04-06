@@ -30,7 +30,13 @@
                          
                                <td><a class="btn btn-warning"  href="<?php echo e(route("files.edit", $file)); ?>">edit </a></td>
 
-                               <td><a class="btn btn-danger" href="<?php echo e(route("files.destroy", $file)); ?>">delete </a></td>
+                               <td> <form action="<?php echo e(route('files.destroy',$file)); ?>" method="POST">   
+                                
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>      
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                  
+                                </form></td>
                                
                                <td>
                                 

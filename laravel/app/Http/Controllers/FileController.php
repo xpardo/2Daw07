@@ -167,12 +167,17 @@ class FileController extends Controller
      * @param  \App\Models\File  $file
      * @return \Illuminate\Http\Response
     */
-    public function destroy(File $file,$id)
+    public function destroy(File $file)
     {
         //
-        
-        File::destroy($id);
-        return redirect('files.index');
+       
+
+        $file->delete();
+    
+  
+        return redirect()->route('files.index')
+        ->with('success','file updated successfully');
+
 
     }
 }
