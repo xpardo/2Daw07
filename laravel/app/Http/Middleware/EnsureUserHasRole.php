@@ -17,7 +17,8 @@ class EnsureUserHasRole
     public function handle(Request $request, Closure $next, $role)
     {
 
-         //un role
+        //un role
+        
        /*  
         if ($request->user()->role_id != $role) {
                 $url = $request->url();
@@ -32,7 +33,6 @@ class EnsureUserHasRole
             return redirect('home')
                 ->with('error', "Access denied to {$url}");
         }
- 
 
         return $next($request);
     }
