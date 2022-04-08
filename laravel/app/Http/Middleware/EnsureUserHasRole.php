@@ -28,12 +28,12 @@ class EnsureUserHasRole
         */
 
        //multi role
-        if ($request->user()->role_id === $role) {
+       /*  if ($request->user()->role_id === $role) {
             $url = $request->url();
             return redirect('home')
                 ->with('error', "Access denied to {$url}");
         }
-
+ */
         return $next($request);
     }
 }

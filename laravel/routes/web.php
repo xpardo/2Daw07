@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\InventariController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,15 @@ Route::post('store', [FileController::class,'store']);
 Route::get('edit/{id}', [FileController::class,'edit']);
 Route::put('update', [FileController::class,'update']);
 Route::get('delete/{id}', [FileController::class,'destroy']);
+
+
+
+
+/**Inventari*/
+
+Route::resource('Inventari', InventariController::class);
+
+/**------------------------ */
 
 Auth::routes();
 
