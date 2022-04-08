@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\MailController;
-use App\Http\Controllers\SeguretatsController;
+
 
 use App\Http\Controllers\FileController;
 
@@ -42,7 +42,7 @@ Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 
 
 
-Route::resource('files', FileController::class);
+Route::resource('files', FileController::class)->middleware(['auth', 'role:3,4']);
 Route::get('create', [FileController::class,'create']);
 Route::post('store', [FileController::class,'store']);
 Route::get('edit/{id}', [FileController::class,'edit']);

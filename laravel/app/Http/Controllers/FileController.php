@@ -163,7 +163,6 @@ class FileController extends Controller
 
         $file->delete();
     
-  
         return redirect()->route('files.index')
         ->with('success','file delete successfully');
 

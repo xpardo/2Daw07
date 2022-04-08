@@ -41,6 +41,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     <button type="submit" class="btn btn-primary">Create</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
+                                    <a class="btn btn-primary" href="{{ route('files.index') }}">Back</a>
                                 </div>
                             </div>
                         </form>

@@ -15,6 +15,9 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <br>
+
+                    <a  class="btn btn-primary" href="{{url('files')}}"><u>files</u></a>
                 </div>
             </div>
         </div>
