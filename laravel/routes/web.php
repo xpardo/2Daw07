@@ -5,8 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\InventariController;
-
+use App\Http\Controllers\CategoriController;
+use App\Http\Controllers\ModelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,7 +53,16 @@ Route::get('delete/{id}', [FileController::class,'destroy']);
 
 /**Inventari*/
 
-Route::resource('Inventari', InventariController::class);
+Route::resource('models', CategoriController::class);///pagina principal on esta la categoria
+Route::get('createCate', [CategoriController::class,'create']);
+Route::get('createMod', [CategoriController::class,'create']);
+Route::post('store', [CategoriController::class,'store']);
+Route::get('delete/{id}', [CategoriController::class,'destroy']);
+
+
+
+ /* Route::resource('models', ModelController::class);  */
+ Route::get('createMod', [ModelController::class,'create']);
 
 /**------------------------ */
 

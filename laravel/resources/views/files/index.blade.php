@@ -15,7 +15,7 @@
                                 <tr>
                                     <td scope="col">ID</td>
                                     <td scope="col">Filepath</td>
-                                    <td scope="col">Filesize</td>
+                                    <td scope="col">Filesize</td>             
                                     <td scope="col">Created</td>
                                     <td scope="col">Updated</td>
                                 </tr>

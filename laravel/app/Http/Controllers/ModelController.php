@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inventari;
-use Illuminate\Http\Request;
 
-class InventariController extends Controller
+use Illuminate\Http\Request;
+use App\Models\Modelo;
+
+class ModelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class InventariController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -25,6 +26,8 @@ class InventariController extends Controller
     public function create()
     {
         //
+       
+        return view("models.createMod");
     }
 
     /**
@@ -36,15 +39,26 @@ class InventariController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            'manufacturer' => 'required',
+            'model' => 'required',
+            'price' => 'required'
+        ]);
+
+        Modelo::create($request->all());
+     
+        return redirect()->route('models.index')
+                        ->with('success','Modelo created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Inventari  $inventari
+     * @param  \App\Models\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
-    public function show(Inventari $inventari)
+    public function show(Modelo $modelo)
     {
         //
     }
@@ -52,10 +66,10 @@ class InventariController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Inventari  $inventari
+     * @param  \App\Models\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Inventari $inventari)
+    public function edit(Modelo $modelo)
     {
         //
     }
@@ -64,10 +78,10 @@ class InventariController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Inventari  $inventari
+     * @param  \App\Models\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inventari $inventari)
+    public function update(Request $request, Modelo $modelo)
     {
         //
     }
@@ -75,10 +89,10 @@ class InventariController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Inventari  $inventari
+     * @param  \App\Models\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Inventari $inventari)
+    public function destroy(Modelo $modelo)
     {
         //
     }
