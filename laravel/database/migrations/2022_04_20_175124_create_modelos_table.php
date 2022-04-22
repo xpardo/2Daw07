@@ -11,6 +11,7 @@ class CreateModelosTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('modelos', function (Blueprint $table) {
@@ -21,7 +22,7 @@ class CreateModelosTable extends Migration
             $table->foreign('photo_id')->references('id')->on('files');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categorias');
-            $table->decimal('price:');
+            $table->string('price');
             $table->timestamps();
         });
     }

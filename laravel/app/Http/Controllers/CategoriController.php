@@ -35,7 +35,7 @@ class CategoriController extends Controller
      */
     public function create()
     {
-       
+        return view("models.createCate");
     }
 
     /**
@@ -46,17 +46,76 @@ class CategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //codic que funciona:
+  /*       
 
          $request->validate([
             'name' => 'required'
         ]);
 
+
         Categoria::create($request->all());
      
         return redirect()->route('models.index')
                         ->with('success','Categoria created successfully.');
+
+
+
+ */
+
+
+        // name file
+        $name = $this->_name($request);
+
+        if ($name) {
+            // Inserir dades a BD
+            $categori = Categoria::create([
+                'filepath' => $name['filepath'],
+                
+            ]);
+            \Log::debug("DB storage OK");
+            // Patró PRG amb missatge d'èxit
+            return redirect()->route('models.index', $categori)
+                ->with('success', 'category successfully saved');
+        } else {
+            // Patró PRG amb missatge d'error
+            return redirect()->route("models.createCate")
+                ->with('error', 'ERROR nameing category');
+        }
                         
+    }
+
+
+
+    /**
+     * Refactor used at store and update
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|bool
+     */
+    private function _name(Request $request)
+    {
+        // Validar fitxer
+        $validatedData = $request->validate([
+            'name' => 'required'
+        ]);
+        
+       
+        Categoria::create($request->all());
+     
+
+        // Pujar fitxer al disc dur
+     
+        $exists = \Storage::disk('public');
+        if ($exists) {
+            \Log::debug("Local storage OK");
+      
+        } else {
+            \Log::debug("Local storage FAILS");
+        }
+
+        
     }
 
     /**
@@ -68,6 +127,8 @@ class CategoriController extends Controller
     public function show($id)
     {
         //
+
+        
     }
 
     /**
@@ -76,9 +137,11 @@ class CategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Categoria $categori)
     {
         //
+        return view('models.editCAte',compact('categori'));
+      
     }
 
     /**
@@ -88,9 +151,19 @@ class CategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Categoria $categori)
     {
         //
+        $request->validate([
+            
+            'name' => 'required'
+        ]);
+
+        
+        $categori->update($request->all());
+
+        return redirect()->route('models.index')
+            ->with('success','categori updated successfully');
     }
 
     /**
@@ -99,13 +172,15 @@ class CategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Categoria $categori)
     {
         //
 
         $categori->delete();
     
-        return redirect()->route('model.index')
-        ->with('success','file delete successfully');
+        return redirect()->route('models.index')
+        ->with('success','categori delete successfully');
+
+     
     }
 }

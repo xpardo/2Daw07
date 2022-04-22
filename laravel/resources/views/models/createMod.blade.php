@@ -28,20 +28,32 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="manufacturer">manufacturer:</label>
-                                        <input type="text" name="manufacturer" class="form-control" placeholder="manufacturer category">
+                                        <input type="text" name="manufacturer" class="form-control" placeholder="manufacturer ">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="model">model:</label>
-                                        <input type="text" name="model" class="form-control" placeholder="model category">
+                                        <input type="text" name="model" class="form-control" placeholder="model">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="file">photo_id:</label>
+                                        <input type="file" name="file" class="form-control" placeholder="img ">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="category">category_id:</label>
+                                        <input type="text" name="category" class="form-control" placeholder="category ">
                                     </div>
                                 </div>
                                 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="price">price:</label>
-                                        <input type="text" name="price" class="form-control" placeholder="price category">
+                                        <input type="text" name="price" class="form-control" placeholder="price ">
                                     </div>
                                 </div>
 

@@ -43,6 +43,8 @@ class ModelController extends Controller
         $request->validate([
             'manufacturer' => 'required',
             'model' => 'required',
+            'photo_id' => 'required',
+            'category_id' => 'required',
             'price' => 'required'
         ]);
 
@@ -61,6 +63,7 @@ class ModelController extends Controller
     public function show(Modelo $modelo)
     {
         //
+        return view('models.show',compact('modelo'));
     }
 
     /**
@@ -72,6 +75,7 @@ class ModelController extends Controller
     public function edit(Modelo $modelo)
     {
         //
+        return view('models.edit',compact('modelo'));
     }
 
     /**
@@ -84,6 +88,20 @@ class ModelController extends Controller
     public function update(Request $request, Modelo $modelo)
     {
         //
+        $request->validate([
+            
+            'manufacturer' => 'required',
+            'model' => 'required',
+            'photo_id' => 'required',
+            'category_id' => 'required',
+            'price' => 'required'
+        ]);
+
+        
+        $modelo->update($request->all());
+
+        return redirect()->route('models.index')
+            ->with('success','model updated successfully');
     }
 
     /**
@@ -95,5 +113,10 @@ class ModelController extends Controller
     public function destroy(Modelo $modelo)
     {
         //
+
+        $modelo->delete();
+    
+        return redirect()->route('models.index')
+        ->with('success','model delete successfully');
     }
 }

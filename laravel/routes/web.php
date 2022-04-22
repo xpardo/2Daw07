@@ -42,6 +42,7 @@ Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth']);
 
 
 Route::resource('files', FileController::class)->middleware(['auth', 'role:3,4']);
+/* Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3,4']); */
 Route::get('create', [FileController::class,'create']);
 Route::post('store', [FileController::class,'store']);
 Route::get('edit/{id}', [FileController::class,'edit']);
@@ -53,9 +54,9 @@ Route::get('delete/{id}', [FileController::class,'destroy']);
 
 /**Inventari*/
 
-Route::resource('models', CategoriController::class);///pagina principal on esta la categoria
+Route::resource('models', CategoriController::class);///pagina principal on esta la categoria i models
 Route::get('createCate', [CategoriController::class,'create']);
-Route::get('createMod', [CategoriController::class,'create']);
+Route::get('editCate/{id}', [CategoriController::class,'edit']);
 Route::post('store', [CategoriController::class,'store']);
 Route::get('delete/{id}', [CategoriController::class,'destroy']);
 
@@ -63,7 +64,9 @@ Route::get('delete/{id}', [CategoriController::class,'destroy']);
 
  /* Route::resource('models', ModelController::class);  */
  Route::get('createMod', [ModelController::class,'create']);
-
+ Route::post('store', [ModelController::class,'store']);
+ Route::get('edit/{id}', [ModelController::class,'edit']);
+ Route::get('delete/{id}', [ModelController::class,'destroy']);
 /**------------------------ */
 
 Auth::routes();

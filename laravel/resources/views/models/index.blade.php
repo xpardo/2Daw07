@@ -28,7 +28,7 @@
                                             <td>{{ $categori->name }}</td>
                                         
                                         
-                                        
+                                          {{--   <td><a class="btn btn-warning"  href="{{ route("models.editCate", $categori) }}">edit </a></td> --}}
 
                                             <td> 
                                                 <form action="{{ route('models.destroy',$categori) }}" method="POST">   
@@ -52,6 +52,7 @@
                          
                         </table>
                     </div>
+<!------------model--------------->
                         <br>
                         <div class="card-header">{{ __('Model') }}</div>
                         <div class="card-body">
@@ -78,11 +79,22 @@
                                         <td>{{ $modelo->id }}</td>
                                         <td>{{ $modelo->manufacturer }}</td>
                                         <td>{{ $modelo->model }}</td>
-                                        <td>{{ $modelo->model }}</td>
                                         <td>{{ $modelo->photo_id }}</td>
+                                        <td>{{ $modelo->category_id }}</td>
                                         <td>{{ $modelo->price }}</td>
                                         <td>{{ $modelo->created_at }}</td>
                                         <td>{{ $modelo->updated_at }}</td>
+                                        <td><a class="btn btn-warning"  href="{{ route("models.edit", $modelo) }}">edit </a></td>
+                                        <td> 
+                                            <form action="{{ route('models.destroy',$categori) }}" method="POST">   
+                                            
+                                                @csrf
+                                                @method('DELETE')      
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            
+                                            </form>
+                                        
+                                        </td>
                                     
 
                                     </tr>
