@@ -15,15 +15,13 @@ class CreateModelosTable extends Migration
     public function up()
     {
         Schema::create('modelos', function (Blueprint $table) {
-            $table->id();
-            $table->string('manufacturer');
-            $table->string('model');
-            $table->unsignedBigInteger('photo_id');
-            $table->foreign('photo_id')->references('id')->on('files');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categorias');
-            $table->string('price');
-            $table->timestamps();
+            $table -> id();
+            $table -> string('manufacturer');
+            $table -> string('model');
+            $table -> integer('photo_id')->nullable();
+            $table -> foreignId('category_id')->references('id')->on('categorias');
+            $table -> decimal('price', 5,2);
+            $table -> timestamps();
         });
     }
 
@@ -34,10 +32,6 @@ class CreateModelosTable extends Migration
      */
     public function down()
     {
-        Schema::table('modelos', function(Blueprint $table) {
-            $table->dropForeign(['category_id']);
-            $table->dropForeign(['photo_id']);
-        });
         Schema::dropIfExists('modelos');
     }
 }
